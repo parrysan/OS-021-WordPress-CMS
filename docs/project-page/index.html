@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OS-021 WordPress CMS — Project page</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <p class="eyebrow">OS-021 · AIOS</p>
+      <h1>WordPress CMS</h1>
+      <p class="purpose">Make a WordPress CMS operable via an agent.</p>
+    </div>
+    <div class="actions">
+      <a class="btn primary" id="wp-admin-link" href="#" target="_blank" rel="noopener">Open WP Admin</a>
+      <button type="button" class="btn" id="refresh-btn">Refresh from WP</button>
+    </div>
+  </header>
+
+  <section class="site-meta" aria-label="WordPress instance">
+    <dl>
+      <div><dt>Site URL</dt><dd id="site-url">— not linked yet —</dd></div>
+      <div><dt>Admin URL</dt><dd id="admin-url">— not linked yet —</dd></div>
+      <div><dt>WP version</dt><dd id="wp-version">—</dd></div>
+      <div><dt>PHP</dt><dd id="php-version">—</dd></div>
+      <div><dt>Environment</dt><dd id="environment">local / Studio</dd></div>
+      <div><dt>Last sync</dt><dd id="last-sync">never</dd></div>
+    </dl>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Configuration surfaces">
+    <button role="tab" aria-selected="true" aria-controls="panel-overview" id="tab-overview" data-tab="overview">Overview</button>
+    <button role="tab" aria-selected="false" aria-controls="panel-plugins" id="tab-plugins" data-tab="plugins">Installed Plugins</button>
+    <button role="tab" aria-selected="false" aria-controls="panel-themes" id="tab-themes" data-tab="themes">Themes</button>
+    <button role="tab" aria-selected="false" aria-controls="panel-settings" id="tab-settings" data-tab="settings">Settings</button>
+    <button role="tab" aria-selected="false" aria-controls="panel-acf" id="tab-acf" data-tab="acf">ACF</button>
+  </nav>
+
+  <main>
+    <section id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <h2>Overview</h2>
+      <p>Operator control plane for a WordPress instance the agent can read and drive. Link a Studio site to populate live config; until then, panels show the schema and any cached snapshot.</p>
+      <ul class="checklist">
+        <li>Agent can list plugins, themes, and core options via WP-CLI / REST</li>
+        <li>Human can jump straight into <code>wp-admin</code></li>
+        <li>ACF Local JSON is the preferred client-edit surface</li>
+      </ul>
+      <h3>Connection</h3>
+      <p class="hint">Set <code>WP_CMS_SITE_URL</code> and related keys in the global <code>.env</code>, or drop a snapshot at <code>src/wp/instance.json</code>.</p>
+      <pre id="connection-status" class="codeblock">No instance linked. Waiting for Studio site URL.</pre>
+    </section>
+
+    <section id="panel-plugins" role="tabpanel" aria-labelledby="tab-plugins" hidden>
+      <div class="panel-head">
+        <h2>Installed Plugins</h2>
+        <p class="hint">Source: <code>wp plugin list --format=json</code> (or REST). Status reflects active / inactive.</p>
+      </div>
+      <div class="table-wrap">
+        <table id="plugins-table">
+          <thead>
+            <tr>
+              <th>Plugin</th>
+              <th>Slug</th>
+              <th>Version</th>
+              <th>Status</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody id="plugins-body">
+            <tr class="empty"><td colspan="5">No plugin data yet — link a WordPress instance or load a snapshot.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="panel-themes" role="tabpanel" aria-labelledby="tab-themes" hidden>
+      <h2>Themes</h2>
+      <p class="hint">Will list installed themes via <code>wp theme list</code>. Stub until instance is linked.</p>
+      <ul id="themes-list" class="simple-list"><li class="muted">—</li></ul>
+    </section>
+
+    <section id="panel-settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+      <h2>Settings</h2>
+      <p class="hint">Typical WordPress configuration attributes the agent needs (site title, permalinks, timezone, reading, discussion, media).</p>
+      <dl id="settings-list" class="settings">
+        <div><dt>blogname</dt><dd>—</dd></div>
+        <div><dt>blogdescription</dt><dd>—</dd></div>
+        <div><dt>permalink_structure</dt><dd>—</dd></div>
+        <div><dt>timezone_string</dt><dd>—</dd></div>
+        <div><dt>date_format</dt><dd>—</dd></div>
+        <div><dt>start_of_week</dt><dd>—</dd></div>
+      </dl>
+    </section>
+
+    <section id="panel-acf" role="tabpanel" aria-labelledby="tab-acf" hidden>
+      <h2>ACF</h2>
+      <p class="hint">Advanced Custom Fields groups and Local JSON path. Prefer fields over Site Editor for client edit.</p>
+      <pre id="acf-status" class="codeblock">ACF not detected — install ACF (+ Local JSON) on the linked site.</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>OS-021-WordPress-CMS · project page · local operator UI</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

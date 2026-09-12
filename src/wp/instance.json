@@ -1,0 +1,25 @@
+{
+  "source": "placeholder — replace via `wp plugin list` / Studio sync",
+  "synced_at": null,
+  "site": {
+    "url": "",
+    "admin_url": "",
+    "wp_version": "",
+    "php_version": "",
+    "environment": "local / Studio"
+  },
+  "plugins": [],
+  "themes": [],
+  "settings": {
+    "blogname": "",
+    "blogdescription": "",
+    "permalink_structure": "",
+    "timezone_string": "",
+    "date_format": "",
+    "start_of_week": ""
+  },
+  "acf": {
+    "active": false,
+    "local_json_path": "wp-content/themes/active/acf-json"
+  }
+}

@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+functions/node_modules/
+
+# Build
+dist/
+build/
+functions/lib/
+.next/
+.nuxt/
+.output/
+
+# Environment — secrets live in the GLOBAL .env at agent-config/.env, never per-project
+.env
+.env.*
+.env.local
+.env.*.local
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+database-debug.log
+pubsub-debug.log
+
+# Doppler
+.doppler.yaml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Secrets — defensive matches in case anything leaks past the .env rule
+*.pem
+*.key
+service-account*.json
+credentials*.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage
+coverage/
+.nyc_output/

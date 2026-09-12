@@ -1,0 +1,95 @@
+/* Client Area style — Oganiko Digital house style (shared across all section pages).
+   Presentation style: "Client Area" (light ground, black header band, green accents).
+   Tabs are the og-tab-rail component (assets/og-tab-rail.css). See wiki/presentation-styles. */
+:root{
+  --og-black:#000; --og-white:#fff; --og-green:#109200; --og-fresh-leaf:#34C755;
+  --og-gold:#EECA25; --og-dark-gray:#333; --og-sage:#9CAF88;
+  --crit:#C0392B; --high:#D97706; --info:#0A5F8A;
+  --ink:#1a1d1a; --muted:#6E7A6A; --line:#e6e8e3; --surface:#f7f8f5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--og-dark-gray);background:var(--og-white);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+a{color:var(--og-green)}
+img{max-width:100%;display:block}
+
+header{background:var(--og-black);color:var(--og-white);padding:44px 0 0}
+header .brand{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--og-fresh-leaf);font-weight:500;margin-bottom:14px}
+header h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:8px}
+header .sub{color:#bbb;font-size:15px;margin-bottom:24px}
+/* Tab rail: the og-tab-rail component (assets/og-tab-rail.css, .og-tab-rail). */
+
+main.wrap{padding:56px 24px 20px}
+main a{color:var(--og-green);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+
+/* lead paragraph — the intro line directly under a title/h2, bolder and a touch larger than body copy */
+p.lead{font-size:17.5px;font-weight:700;color:var(--ink);line-height:1.55}
+
+h2{font-size:22px;font-weight:700;color:var(--og-black);margin:44px 0 14px;padding-top:26px;border-top:2px solid var(--line)}
+h2:first-child{margin-top:0;border-top:none;padding-top:0}
+h3{font-size:17px;font-weight:700;color:var(--og-black);margin:26px 0 10px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px 22px}li{margin-bottom:7px}
+strong{font-weight:700;color:var(--ink)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--og-green)}
+
+/* verdict / callouts */
+.verdict{background:#F3FAF3;border:1px solid var(--og-fresh-leaf);border-left:5px solid var(--og-green);border-radius:12px;padding:22px 24px;margin:22px 0}
+.verdict .eyebrow{color:var(--og-green)}
+.verdict h3{margin:6px 0 8px}
+.verdict p{margin:0;font-size:15.5px}
+.status{background:#FFFBEB;border:1px solid var(--og-gold);border-radius:10px;padding:16px 20px;margin:20px 0;font-size:14.5px}
+.status b{color:#8a6d00}
+.note{background:var(--surface);border-left:4px solid var(--og-sage);border-radius:0 8px 8px 0;padding:14px 18px;margin:18px 0;font-size:14px;color:#4a534a}
+
+/* data-space placeholder */
+.dataspace{border:1.5px dashed #cdd3c9;border-radius:12px;padding:22px 24px;margin:16px 0;background:repeating-linear-gradient(45deg,#fafbf9,#fafbf9 12px,#f4f6f2 12px,#f4f6f2 24px)}
+.dataspace .lbl{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.dataspace .lbl::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--og-gold)}
+.dataspace h3{margin:0 0 6px}
+.dataspace p{margin:0;font-size:14px;color:var(--muted)}
+
+/* cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
+.card{display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+a.card:hover{border-color:var(--og-fresh-leaf)}
+.card .kicker{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--og-green)}
+.card h3{margin:6px 0 6px}
+.card p{font-size:14px;color:#555;margin:0 0 10px}
+.card .go{font-size:14px;font-weight:700;color:var(--og-green)}
+.card.pending{border-style:dashed}
+.card.pending .kicker{color:var(--muted)}
+.card.pending .go{color:var(--muted)}
+
+/* table */
+.scroll{overflow-x:auto;margin:20px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:520px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--og-black);color:#fff;font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;font-weight:600}
+tbody tr:nth-child(even){background:var(--surface)}
+td .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.pill.best{background:#D1FAE5;color:#047857}.pill.mid{background:#FEF3C7;color:#B45309}.pill.pre{background:#E6F2F7;color:#0A5F8A}
+
+footer{margin-top:52px;padding:30px 0;background:var(--og-black);color:#aaa;font-size:13px}
+footer .brand{color:var(--og-fresh-leaf);font-weight:700}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.sources{font-size:13.5px}.sources li{margin-bottom:5px}
+
+@media(max-width:600px){header h1{font-size:23px}.cards{grid-template-columns:1fr}main.wrap{padding:40px 20px 20px}}
+
+/* Gateway workspace cards (STR pattern) */
+.cards-gateway{display:grid;grid-template-columns:1fr;gap:18px;margin:8px 0 36px}
+@media(min-width:760px){.cards-gateway{grid-template-columns:repeat(2,1fr)}}
+.card-gateway{background:#F3FAF3;border-color:var(--og-fresh-leaf)}
+.card-gateway p{font-size:13.5px;line-height:1.55}
+.card-gateway .go{margin-top:4px;display:inline-block}
+a.card{text-decoration:none}
+p.lead{font-size:17px;font-weight:700;color:var(--ink);line-height:1.55;margin:0 0 6px}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:14px 18px;margin:18px 0 8px}
+.meta-grid dt{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.meta-grid dd{margin:4px 0 0;font-size:14px;color:var(--ink);word-break:break-word}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.pill.active{background:#D1FAE5;color:#047857}
+.pill.inactive{background:#F3F4F2;color:#6E7A6A}
+.pill.available{background:#FEF3C7;color:#B45309}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:0.9em}

@@ -1,13 +1,5 @@
-# Project page (operator UI)
+# Project page → Client Area
 
-Local control plane for the linked WordPress instance.
+The operator UI now lives at **`../client-area/`** in Client Area style (same pattern as STR).
 
-- Open `index.html` via a tiny static server so `fetch` of `../../src/wp/instance.json` works:
-
-```bash
-cd ~/OG/dev/OS-021-WordPress-CMS
-python3 -m http.server 8021 --bind 127.0.0.1
-# then http://127.0.0.1:8021/docs/project-page/
-```
-
-Tabs: Overview · Installed Plugins · Themes · Settings · ACF.
+Open: http://127.0.0.1:8022/docs/client-area/

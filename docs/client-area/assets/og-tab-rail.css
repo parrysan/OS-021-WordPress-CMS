@@ -1,0 +1,52 @@
+/* ============================================================
+   Oganiko Tab Rail — og-tab-rail
+   Canonical component · OS-000 os-002 Tabs / header-nav-dark
+   Source of truth: OS-000-Design-System/packages/og-tab-rail.css
+   ------------------------------------------------------------
+   Provenance: proven in OG-030 client hub (2026-07-04), Phil-approved.
+   Self-contained: every token carries an Oganiko fallback, so this file
+   works alone. Override the tokens in :root to re-theme.
+   DO NOT edit vendored copies — sync from this source.
+   version: 1.1.0 (2026-08-11)
+   ============================================================ */
+
+/* Row of section links on a dark surface. Active link merges into the page:
+   a same-colour box-shadow breaks the accent bar beneath it.
+   Markup:  <nav class="og-tab-rail"> <a aria-current="page">…</a> <a>…</a> </nav>
+   Place on a dark header. Mark the current page with aria-current="page".
+   The accent bar is a padding-area background gradient, NOT a border:
+   overflow clips children at the padding edge, so a border-bottom would sit
+   outside the clip and the active tab's bar-breaking shadow gets amputated
+   (green line reappears under the selected tab). Padding keeps the bar and
+   the shadow inside the same clip region. */
+.og-tab-rail{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:var(--spacing-1,4px);
+  padding-bottom:3px;
+  background:linear-gradient(to top,var(--color-accent,#109200) 3px,transparent 3px);
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+}
+.og-tab-rail::-webkit-scrollbar{height:4px}
+.og-tab-rail::-webkit-scrollbar-thumb{background:var(--color-accent,#109200);border-radius:2px}
+.og-tab-rail a{
+  flex:0 0 auto;
+  color:var(--color-text-inverse-muted,#cccccc);
+  text-decoration:none;
+  font-size:var(--text-sm,0.875rem);
+  font-weight:var(--weight-medium,500);
+  padding:10px 18px;
+  border-radius:var(--radius-md,8px) var(--radius-md,8px) 0 0;
+}
+.og-tab-rail a[aria-current="page"]{
+  background:var(--color-bg,#ffffff);
+  color:var(--color-text,#1a1a1a);
+  font-weight:var(--weight-bold,700);
+  box-shadow:0 3px 0 0 var(--color-bg,#ffffff);
+}
+.og-tab-rail a:hover:not([aria-current="page"]){
+  background:var(--color-bg-inverse-hover,#1c1c1c);
+  color:var(--color-text-inverse,#ffffff);
+}

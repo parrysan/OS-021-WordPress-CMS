@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>WordPress CMS | Oganiko Digital</title>
+<link rel="stylesheet" href="assets/client.css">
+<link rel="stylesheet" href="assets/og-tab-rail.css">
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand">OGANIKO Digital</div>
+  <h1>WordPress CMS</h1>
+  <div class="sub">updated <span id="last-updated"></span></div>
+  <script>
+    (function () {
+      var d = new Date(document.lastModified);
+      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+    })();
+  </script>
+  <nav class="og-tab-rail">
+    <a href="./" aria-current="page">Overview</a>
+    <a href="plugins/">Installed Plugins</a>
+    <a href="themes/">Themes</a>
+    <a href="settings/">Settings</a>
+    <a href="acf/">ACF</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <h2 style="margin-top:10px">Workspaces</h2>
+  <p class="lead">Agent-operable WordPress control plane: admin access, live config, and the surfaces an agent needs to build and maintain a site.</p>
+
+  <div class="cards-gateway">
+    <a class="card card-gateway" id="wp-admin-link" href="#" target="_blank" rel="noopener" aria-disabled="true">
+      <span class="kicker">01 · WordPress</span>
+      <h3>WP Admin</h3>
+      <p>Jump into the linked WordPress admin. Enabled once a Studio site URL is connected.</p>
+      <span class="go">Open WP Admin ↗</span>
+    </a>
+    <a class="card card-gateway" href="plugins/">
+      <span class="kicker">02 · Configuration</span>
+      <h3>Installed Plugins</h3>
+      <p>Live list of plugins on the instance — name, slug, version, active/inactive, updates.</p>
+      <span class="go">Open Installed Plugins →</span>
+    </a>
+    <a class="card card-gateway" href="settings/">
+      <span class="kicker">03 · Configuration</span>
+      <h3>Core settings</h3>
+      <p>Typical WordPress options the agent needs: site title, permalinks, timezone, reading.</p>
+      <span class="go">Open Settings →</span>
+    </a>
+    <a class="card card-gateway" href="acf/">
+      <span class="kicker">04 · Client edit</span>
+      <h3>ACF</h3>
+      <p>Advanced Custom Fields + Local JSON — fields for clients, not the Site Editor.</p>
+      <span class="go">Open ACF →</span>
+    </a>
+  </div>
+
+  <h2>Instance</h2>
+  <p>Linked WordPress Studio site and sync status. Feed: <code>src/wp/instance.json</code>.</p>
+  <dl class="meta-grid">
+    <div><dt>Site URL</dt><dd id="site-url">— not linked yet —</dd></div>
+    <div><dt>Admin URL</dt><dd id="admin-url">— not linked yet —</dd></div>
+    <div><dt>WP version</dt><dd id="wp-version">—</dd></div>
+    <div><dt>PHP</dt><dd id="php-version">—</dd></div>
+    <div><dt>Environment</dt><dd id="environment">local / Studio</dd></div>
+    <div><dt>Last sync</dt><dd id="last-sync">never</dd></div>
+  </dl>
+
+  <h2>The project</h2>
+  <p><strong>WordPress CMS</strong> (OS-021) makes a WordPress instance operable via an agent. WordPress is the CMS binding; the agent loop is WordPress Studio + WP-CLI / MCP skills; client edit prefers ACF Local JSON over the Site Editor. Fronts pull OS-000 tokens — sites are theme-neutral plus their own brand, not OGANIKO green.</p>
+  <p>This Client Area is the single place where instance admin access and configuration surfaces come together. Each area has its own tab. Where a WordPress site is linked, panels fill from the snapshot; until then, spaces are reserved.</p>
+
+  <h2>Where things stand</h2>
+  <div class="status"><b>Just initialised.</b> Client Area scaffolded 12 September 2026. Next: link a WordPress Studio instance and sync plugins into <code>src/wp/instance.json</code>.</div>
+
+  <div class="note">This area is private (<code>noindex</code>) and intended for project stakeholders. It is a living workspace — sections fill out as the WordPress instance is linked.</div>
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 <span class="brand">Oganiko Digital</span> · OS-021-WordPress-CMS</span>
+  <span>Private project workspace</span>
+</div></footer>
+<script src="assets/instance.js"></script>
+<script>
+  WpCms.loadInstance().then(function (data) { WpCms.applyOverview(data || {}); });
+</script>
+</body>
+</html>

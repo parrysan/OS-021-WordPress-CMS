@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Installed Plugins · WordPress CMS | Oganiko Digital</title>
+<link rel="stylesheet" href="../assets/client.css">
+<link rel="stylesheet" href="../assets/og-tab-rail.css">
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand">OGANIKO Digital</div>
+  <h1>WordPress CMS</h1>
+  <div class="sub">updated <span id="last-updated"></span></div>
+  <script>
+    (function () {
+      var d = new Date(document.lastModified);
+      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+    })();
+  </script>
+  <nav class="og-tab-rail">
+    <a href="../">Overview</a>
+    <a href="./" aria-current="page">Installed Plugins</a>
+    <a href="../themes/">Themes</a>
+    <a href="../settings/">Settings</a>
+    <a href="../acf/">ACF</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <h2 style="margin-top:10px">Installed Plugins</h2>
+  <p class="lead">Plugins currently on the linked WordPress instance.</p>
+  <p>Source: <code>wp plugin list --format=json</code> (or REST), written into <code>src/wp/instance.json</code>.</p>
+
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Plugin</th>
+          <th>Slug</th>
+          <th>Version</th>
+          <th>Status</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tbody id="plugins-body">
+        <tr><td colspan="5">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">Until a Studio site is linked, this table stays empty by design — no invented plugin list.</div>
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 <span class="brand">Oganiko Digital</span> · OS-021-WordPress-CMS</span>
+  <span>Private project workspace</span>
+</div></footer>
+<script src="../assets/instance.js"></script>
+<script>
+  WpCms.loadInstance().then(function (data) { WpCms.renderPluginsTable(data || {}); });
+</script>
+</body>
+</html>

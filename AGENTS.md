@@ -53,7 +53,8 @@ created: "2026-09-12"
 > **Operational facts that should never have to be re-discovered.** Deployed URLs, store handles, theme IDs, API endpoints, credentials *location* (never the credentials themselves — those live in the global `.env`, see global AGENT.md §2.5). Update this section whenever a fact changes — it is the canonical source.
 
 - **Production URL**: none yet
-- **Staging / preview URL**: project page at `docs/project-page/` (local file open); WordPress instance URL TBD once Studio site is linked
+- **Client area**: `docs/client-area/` (Overview + Installed Plugins + Themes + Settings + ACF — Client Area style)
+- **Staging / preview URL**: http://127.0.0.1:8022/docs/client-area/ (`python3 -m http.server 8022 --bind 127.0.0.1` from repo root); WordPress instance URL TBD once Studio site is linked
 - **Platform handle / project ID**: none yet
 - **Other identifiers**: architecture lock in `OS-000-RES/docs/intelligence/reports/2026-08-23-research-ai-wordpress-cms.md` — WP binding · Studio + MCP/skills · hybrid/block + ACF
 - **Credentials**: stored in global `.env` under `WP_CMS_*` (none yet)
@@ -69,7 +70,7 @@ Depends on project scope — no default web stack. Define as needed.
 Working defaults (from locked research, refine as facts emerge):
 - **CMS binding**: WordPress (classic/hybrid + ACF; not ZipWP/Elementor Angie)
 - **Agent loop**: WordPress Studio + Studio MCP/skills + WP-CLI
-- **Operator UI**: project page under `docs/project-page/` (tabs for config surfaces such as Installed Plugins)
+- **Operator UI**: Client Area under `docs/client-area/` (STR-style hub; tabs for Installed Plugins, Themes, Settings, ACF)
 - **Front tokens**: OS-000 Design System (sites are theme-neutral + own brand — not OGANIKO green)
 
 ---
@@ -99,4 +100,4 @@ Working defaults (from locked research, refine as facts emerge):
 
 > **Optional, ephemeral.** A 2–3 line free-form scratch pad of "where I left off" — not durable knowledge. Durable decisions belong in the vault project page. Wipe and rewrite freely.
 
-Scaffolded 2026-09-12. Project page seeded with Overview + Installed Plugins tabs. Next: link a real WordPress Studio instance and wire plugins list to WP-CLI/`wp plugin list`.
+Scaffolded 2026-09-12. Client Area (STR style) with Overview + Installed Plugins (+ Themes, Settings, ACF). Next: link a WordPress Studio instance and sync `src/wp/instance.json`.

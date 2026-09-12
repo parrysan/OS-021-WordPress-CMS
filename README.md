@@ -6,7 +6,7 @@
 
 - **For working on this project**: read `AGENTS.md` in this folder. It is the canonical bootstrap manifest — it tells any agent (or human) which files to read and in what order. `CLAUDE.md` is a one-line shim that imports it.
 - **For project status, decisions, and history**: see the vault project page at `vault/projects/OS-021-WordPress-CMS/README.md`.
-- **Operator UI**: open `docs/project-page/index.html` — Overview + Installed Plugins (and more tabs as surfaces are wired).
+- **Client Area**: open http://127.0.0.1:8022/docs/client-area/ — Overview + Installed Plugins (+ Themes, Settings, ACF).
 
 ## Quick facts
 

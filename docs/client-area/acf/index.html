@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ACF · WordPress CMS | Oganiko Digital</title>
+<link rel="stylesheet" href="../assets/client.css">
+<link rel="stylesheet" href="../assets/og-tab-rail.css">
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand">OGANIKO Digital</div>
+  <h1>WordPress CMS</h1>
+  <div class="sub">updated <span id="last-updated"></span></div>
+  <script>
+    (function () {
+      var d = new Date(document.lastModified);
+      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+    })();
+  </script>
+  <nav class="og-tab-rail">
+    <a href="../">Overview</a>
+    <a href="../plugins/">Installed Plugins</a>
+    <a href="../themes/">Themes</a>
+    <a href="../settings/">Settings</a>
+    <a href="./" aria-current="page">ACF</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <h2 style="margin-top:10px">ACF</h2>
+  <p class="lead">Advanced Custom Fields — the preferred client-edit surface.</p>
+  <p>Clients get fields, not the Site Editor. Prefer ACF Local JSON so field groups stay in git and agents can operate them via WP-CLI.</p>
+  <div id="acf-status"></div>
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 <span class="brand">Oganiko Digital</span> · OS-021-WordPress-CMS</span>
+  <span>Private project workspace</span>
+</div></footer>
+<script src="../assets/instance.js"></script>
+<script>
+  WpCms.loadInstance().then(function (data) { WpCms.renderAcf(data || {}); });
+</script>
+</body>
+</html>

@@ -12,7 +12,7 @@
 
 - **Project code**: OS-021-WordPress-CMS
 - **Created**: 2026-09-12
-- **GitHub**: https://github.com/parrysan/OS-021-WordPress-CMS *(pending auth)*
+- **GitHub**: https://github.com/parrysan/OS-021-WordPress-CMS 
 
 ## Structure
 

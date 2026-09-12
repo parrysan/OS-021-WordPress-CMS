@@ -41,7 +41,7 @@ created: "2026-09-12"
 | **Code root** | this folder (`dev/OS-021-WordPress-CMS/`) |
 | **Project docs** | `./docs/` |
 | **Vault project page** | `Open-Memory-Vault/projects/OS-021-WordPress-CMS/README.md` |
-| **GitHub repo** | https://github.com/parrysan/OS-021-WordPress-CMS *(pending — gh auth broken at scaffold)* |
+| **GitHub repo** | https://github.com/parrysan/OS-021-WordPress-CMS |
 | **Research store** | [OG-Research/OS-021-WordPress-CMS](https://drive.google.com/drive/folders/1ksMgv9awpOYfn5i4LZTadjbdoo1Mua0y) (`research/`, `assets/`, `deliverables/`) |
 | **External systems** | WordPress Studio (local WP instances); WP-CLI; ACF Local JSON |
 | **Related** | `OS-000-RES` research `ai-wordpress-cms` (2026-08-23); `OS-012-Headless-CMS` (Sanity — different stack); `OG-019-Phil-v2` public narrative |
@@ -58,7 +58,7 @@ created: "2026-09-12"
 - **Platform handle / project ID**: none yet
 - **Other identifiers**: architecture lock in `OS-000-RES/docs/intelligence/reports/2026-08-23-research-ai-wordpress-cms.md` — WP binding · Studio + MCP/skills · hybrid/block + ACF
 - **Credentials**: stored in global `.env` under `WP_CMS_*` (none yet)
-- **GitHub**: pending — create with `gh repo create parrysan/OS-021-WordPress-CMS --public --source=. --remote=origin --push` after `gh auth login`
+- **GitHub**: https://github.com/parrysan/OS-021-WordPress-CMS
 - **NotebookLM**: (not provisioned — opt-in, add later)
 
 ---

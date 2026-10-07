@@ -55,5 +55,5 @@ yarn-error.log*
 coverage/
 .nyc_output/
 
-# Real Studio host details (public repo) — written by the sync, read by the Client Area
+# Real Studio host details (public repo) — local override read by the Client Area
 src/wp/instance.local.json

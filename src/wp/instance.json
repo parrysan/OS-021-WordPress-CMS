@@ -1,25 +1,72 @@
 {
-  "source": "placeholder — replace via `wp plugin list` / Studio sync",
-  "synced_at": null,
+  "source": "read-only sync from <container> (Studio, Tailscale Serve)",
+  "synced_at": "2026-10-07T08:22:36Z",
   "site": {
-    "url": "",
-    "admin_url": "",
-    "wp_version": "",
-    "php_version": "",
-    "environment": "local / Studio"
+    "url": "https://<studio-tailnet-host>/",
+    "admin_url": "https://<studio-tailnet-host>/wp-admin/",
+    "wp_version": "7.1.3",
+    "php_version": "8.3.31",
+    "environment": "Studio · Tailscale Serve"
   },
-  "plugins": [],
-  "themes": [],
+  "plugins": [
+    {
+      "name": "Advanced Custom Fields",
+      "slug": "advanced-custom-fields",
+      "version": "6.8.10",
+      "status": "active",
+      "update": "none"
+    },
+    {
+      "name": "Akismet Anti-spam: Spam Protection",
+      "slug": "akismet",
+      "version": "5.7.2",
+      "status": "inactive",
+      "update": "none"
+    },
+    {
+      "name": "Hello Dolly",
+      "slug": "hello",
+      "version": "1.7.2",
+      "status": "inactive",
+      "update": "none"
+    }
+  ],
+  "themes": [
+    {
+      "name": "OGANIKO WordPress Theme",
+      "stylesheet": "oganiko",
+      "version": "1.0.0",
+      "status": "active"
+    },
+    {
+      "name": "Twenty Twenty-Five",
+      "stylesheet": "twentytwentyfive",
+      "version": "1.4",
+      "status": "inactive"
+    },
+    {
+      "name": "Twenty Twenty-Four",
+      "stylesheet": "twentytwentyfour",
+      "version": "1.4",
+      "status": "inactive"
+    },
+    {
+      "name": "Twenty Twenty-Three",
+      "stylesheet": "twentytwentythree",
+      "version": "1.6",
+      "status": "inactive"
+    }
+  ],
   "settings": {
-    "blogname": "",
+    "blogname": "OGANIKO Digital",
     "blogdescription": "",
-    "permalink_structure": "",
+    "permalink_structure": "/%postname%/",
     "timezone_string": "",
-    "date_format": "",
-    "start_of_week": ""
+    "date_format": "F j, Y",
+    "start_of_week": "1"
   },
   "acf": {
-    "active": false,
-    "local_json_path": "wp-content/themes/active/acf-json"
+    "active": true,
+    "local_json_path": "wp-content/acf-json"
   }
 }

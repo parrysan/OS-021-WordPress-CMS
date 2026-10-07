@@ -22,17 +22,22 @@
   }
 
   async function loadInstance() {
-    const candidates = [
-      "../../src/wp/instance.json",
-      "../src/wp/instance.json",
-      "/src/wp/instance.json",
+    const bases = [
+      "../../src/wp/",
+      "../src/wp/",
+      "/src/wp/",
     ];
-    for (const url of candidates) {
+    const fetchJson = async (url) => {
       try {
         const res = await fetch(url, { cache: "no-store" });
-        if (!res.ok) continue;
-        return await res.json();
-      } catch (_) { /* next */ }
+        return res.ok ? await res.json() : null;
+      } catch (_) { return null; }
+    };
+    for (const base of bases) {
+      const data = await fetchJson(base + "instance.json");
+      if (!data) continue;
+      const local = await fetchJson(base + "instance.local.json");
+      return local ? { ...data, ...local, site: { ...data.site, ...local.site } } : data;
     }
     return null;
   }
@@ -45,7 +50,11 @@
   }
 
   function applyOverview(data) {
-    const { siteUrl, adminUrl, site } = siteUrls(data || {});
+    const urls = siteUrls(data || {});
+    const { site } = urls;
+    const configured = !urls.siteUrl.includes("<") && !urls.adminUrl.includes("<");
+    const siteUrl = configured ? urls.siteUrl : "Host not configured";
+    const adminUrl = configured ? urls.adminUrl : "Host not configured";
     const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
     set("site-url", siteUrl || "— not linked yet —");
     set("admin-url", adminUrl || "— not linked yet —");
@@ -56,7 +65,9 @@
 
     const admin = document.getElementById("wp-admin-link");
     if (admin) {
-      if (adminUrl) {
+      const linkable = configured && adminUrl;
+      admin.hidden = !linkable;
+      if (linkable) {
         admin.href = adminUrl;
         admin.removeAttribute("aria-disabled");
       } else {

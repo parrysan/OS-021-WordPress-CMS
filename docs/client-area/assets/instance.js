@@ -50,7 +50,11 @@
   }
 
   function applyOverview(data) {
-    const { siteUrl, adminUrl, site } = siteUrls(data || {});
+    const urls = siteUrls(data || {});
+    const { site } = urls;
+    const configured = !urls.siteUrl.includes("<") && !urls.adminUrl.includes("<");
+    const siteUrl = configured ? urls.siteUrl : "Host not configured";
+    const adminUrl = configured ? urls.adminUrl : "Host not configured";
     const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
     set("site-url", siteUrl || "— not linked yet —");
     set("admin-url", adminUrl || "— not linked yet —");
@@ -61,7 +65,9 @@
 
     const admin = document.getElementById("wp-admin-link");
     if (admin) {
-      if (adminUrl) {
+      const linkable = configured && adminUrl;
+      admin.hidden = !linkable;
+      if (linkable) {
         admin.href = adminUrl;
         admin.removeAttribute("aria-disabled");
       } else {

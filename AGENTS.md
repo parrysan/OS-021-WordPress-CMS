@@ -30,7 +30,7 @@ created: "2026-09-12"
 - **Autonomy mode**: `co-pilot` — Phil drives, agent assists. See master prompt.
 - **Purpose** (one sentence): Make a WordPress CMS operable via an agent.
 - **Client dashboard**: _(not applicable — internal AIOS infrastructure)_
-- **Last touched**: `2026-09-12`
+- **Last touched**: `2026-10-07`
 
 ---
 
@@ -54,7 +54,7 @@ created: "2026-09-12"
 
 - **Production URL**: none yet
 - **Client area**: `docs/client-area/` (Overview + Installed Plugins + Themes + Settings + ACF — Client Area style)
-- **Staging / preview URL**: http://127.0.0.1:8022/docs/client-area/ (`python3 -m http.server 8022 --bind 127.0.0.1` from repo root); WordPress instance URL TBD once Studio site is linked
+- **Staging / preview URL**: http://127.0.0.1:8022/docs/client-area/ (`python3 -m http.server 8022 --bind 127.0.0.1` from repo root); WordPress instance on the Studio via Tailscale Serve (real host in gitignored `src/wp/instance.local.json`; repo is public, keep tailnet details out of tracked files)
 - **Platform handle / project ID**: none yet
 - **Other identifiers**: architecture lock in `OS-000-RES/docs/intelligence/reports/2026-08-23-research-ai-wordpress-cms.md` — WP binding · Studio + MCP/skills · hybrid/block + ACF
 - **Credentials**: stored in global `.env` under `WP_CMS_*` (none yet)
@@ -100,4 +100,4 @@ Working defaults (from locked research, refine as facts emerge):
 
 > **Optional, ephemeral.** A 2–3 line free-form scratch pad of "where I left off" — not durable knowledge. Durable decisions belong in the vault project page. Wipe and rewrite freely.
 
-Scaffolded 2026-09-12. Client Area (STR style) with Overview + Installed Plugins (+ Themes, Settings, ACF). Next: link a WordPress Studio instance and sync `src/wp/instance.json`.
+Linked 2026-10-07: Studio oganiko clone synced into `src/wp/instance.json` (site, admin, plugins, themes, settings, ACF).

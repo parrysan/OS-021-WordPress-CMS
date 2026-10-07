@@ -22,17 +22,22 @@
   }
 
   async function loadInstance() {
-    const candidates = [
-      "../../src/wp/instance.json",
-      "../src/wp/instance.json",
-      "/src/wp/instance.json",
+    const bases = [
+      "../../src/wp/",
+      "../src/wp/",
+      "/src/wp/",
     ];
-    for (const url of candidates) {
+    const fetchJson = async (url) => {
       try {
         const res = await fetch(url, { cache: "no-store" });
-        if (!res.ok) continue;
-        return await res.json();
-      } catch (_) { /* next */ }
+        return res.ok ? await res.json() : null;
+      } catch (_) { return null; }
+    };
+    for (const base of bases) {
+      const data = await fetchJson(base + "instance.json");
+      if (!data) continue;
+      const local = await fetchJson(base + "instance.local.json");
+      return local ? { ...data, ...local, site: { ...data.site, ...local.site } } : data;
     }
     return null;
   }

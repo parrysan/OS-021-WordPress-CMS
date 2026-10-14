@@ -3,7 +3,7 @@
   "name": "oganiko.com",
   "project": "OG-019",
   "status": "not_connected",
-  "source": "stub — not connected yet (do not touch live oganiko.com or its DNS)",
+  "source": "stub \u2014 not connected yet (do not touch live oganiko.com or its DNS)",
   "synced_at": null,
   "site": {
     "url": "",
@@ -18,10 +18,12 @@
   "settings": {},
   "acf": null,
   "seo": {
+    "module": "built-in",
+    "data_file": "instances/oganiko.seo.json",
     "dashboard_url": "",
-    "dashboard_label": "SEO dashboard (not connected yet)",
+    "dashboard_label": "SEO dashboard (built-in; empty until connected)",
     "data_nature": "none",
-    "notes": "Declare this instance's SEO dashboard URL once OG-019 WordPress is linked. Pattern matches Steve: per-instance seo.dashboard_url in the feed.",
+    "notes": "SEO tab is always present. Empty-state until oganiko.seo.json has keywords.",
     "summary": null
   },
   "connection_needed": [

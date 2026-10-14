@@ -4,7 +4,7 @@
   "project": "OG-001-Steve",
   "status": "connected",
   "source": "read-only sync from steveapps-wordpress-1 (Docker on Studio; Tailscale Serve)",
-  "synced_at": "2026-10-14T11:51:02Z",
+  "synced_at": "2026-10-14T11:57:36Z",
   "site": {
     "url": "https://<studio-tailnet-host>:8483/",
     "admin_url": "https://<studio-tailnet-host>:8483/wp-admin/",
@@ -307,10 +307,12 @@
     ]
   },
   "seo": {
-    "dashboard_url": "https://<studio-tailnet-host>:8483/wp-admin/admin.php?page=steve-seo-tracking",
-    "dashboard_label": "SEO tracking (wp-admin, staging demo)",
+    "module": "built-in",
+    "data_file": "instances/steve.seo.json",
+    "wp_admin_dashboard_url": "https://<studio-tailnet-host>:8483/wp-admin/admin.php?page=steve-seo-tracking",
+    "dashboard_label": "SEO tracking (wp-admin staging mirror)",
     "data_nature": "dummy",
-    "notes": "Staging Open Search-style keyword tracking (mu-plugin). Hand-set demonstration values; nothing is tracked or fetched. Opt-in when WP_ENVIRONMENT_TYPE=staging.",
+    "notes": "Built-in OS-021 SEO module with demonstration values mirrored from OG-001-Steve staging SEO tracking (PR 5). Nothing is tracked or fetched.",
     "summary": {
       "keywords": 27,
       "ranking": 5,

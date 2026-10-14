@@ -79,6 +79,26 @@
     return deepMerge(data, local);
   }
 
+  async function loadSeoFeed(base, entry) {
+    const id = entry.id;
+    const candidates = [
+      `instances/${id}.seo.json`,
+      (entry.feed || "").replace(/\.json$/, ".seo.json"),
+    ].filter(Boolean);
+    for (const path of candidates) {
+      const data = await fetchJson(base + path);
+      if (data) return data;
+    }
+    return {
+      instance_id: id,
+      data_nature: "none",
+      source: "SEO module present; no per-instance data file yet.",
+      totals: null,
+      engines: ["ChatGPT", "Perplexity", "Google AI Overviews", "Claude"],
+      keywords: [],
+    };
+  }
+
   async function loadInstance() {
     const loaded = await loadCatalog();
     if (!loaded) return null;
@@ -88,9 +108,11 @@
     if (!entry) return null;
     setSelectedId(entry.id);
     const data = await loadInstanceFeed(base, entry);
+    const seoData = await loadSeoFeed(base, entry);
     return {
       catalog,
       entry,
+      seoData,
       data: data || {
         id: entry.id,
         name: entry.name,
@@ -100,7 +122,7 @@
         themes: [],
         settings: {},
         acf: null,
-        seo: { dashboard_url: "", data_nature: "none", notes: "Feed missing." },
+        seo: { module: "built-in", data_nature: "none", notes: "Feed missing." },
       },
     };
   }
@@ -299,38 +321,38 @@
     if (!root) return;
     const data = (bundle && bundle.data) || {};
     const entry = (bundle && bundle.entry) || {};
-    const seo = data.seo || {};
+    const seoMeta = data.seo || {};
+    const seoData = (bundle && bundle.seoData) || {
+      data_nature: "none",
+      keywords: [],
+      source: "SEO module present; no per-instance data file yet.",
+    };
     const disconnected = (data.status || entry.status) === "not_connected";
-    const url = seo.dashboard_url || "";
-    const configured = isConfigured(url);
-    const nature = seo.data_nature || "none";
-    const summary = seo.summary || null;
+    const wpUrl = seoMeta.wp_admin_dashboard_url || "";
+    const configured = isConfigured(wpUrl);
 
-    let summaryHtml = "";
-    if (summary && typeof summary === "object") {
-      summaryHtml = `<dl class="meta-grid">
-        ${Object.entries(summary).map(([k, v]) =>
-          `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd></div>`
-        ).join("")}
-      </dl>`;
-    }
-
-    root.innerHTML = `
+    const meta = document.createElement("div");
+    meta.innerHTML = `
       <dl class="meta-grid">
         <div><dt>Instance</dt><dd>${escapeHtml(data.name || entry.name || "—")}</dd></div>
-        <div><dt>Data nature</dt><dd>${escapeHtml(nature)}${nature === "dummy" ? " (demonstration — not live rank tracking)" : ""}</dd></div>
-        <div><dt>Dashboard</dt><dd>${configured
-          ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(seo.dashboard_label || "Open SEO dashboard")} ↗</a>`
-          : (disconnected ? "Not connected yet" : "URL not configured")}</dd></div>
+        <div><dt>Module</dt><dd>Built into OS-021 (default for every instance)</dd></div>
+        <div><dt>Data file</dt><dd><code>src/wp/instances/${escapeHtml(entry.id || data.id || "")}.seo.json</code></dd></div>
+        <div><dt>Data nature</dt><dd>${escapeHtml(seoData.data_nature || "none")}${(seoData.data_nature || "") === "dummy" ? " (demonstration — not live rank tracking)" : ""}</dd></div>
+        ${configured ? `<div><dt>WP-admin mirror</dt><dd><a href="${escapeHtml(wpUrl)}" target="_blank" rel="noopener">${escapeHtml(seoMeta.dashboard_label || "Open staging wp-admin SEO")} ↗</a></dd></div>` : ""}
       </dl>
-      <p>${escapeHtml(seo.notes || "")}</p>
-      ${summaryHtml ? "<h3>Summary (from site dashboard)</h3>" + summaryHtml : ""}
       ${disconnected && Array.isArray(data.connection_needed) ? `
-        <h3>To connect</h3>
+        <h3>To connect this instance</h3>
         <ul>${data.connection_needed.map((c) => `<li>${escapeHtml(c)}</li>`).join("")}</ul>
       ` : ""}
-      <div class="note">Each instance declares its own <code>seo.dashboard_url</code>. This tab does not start rank tracking or call DataForSEO.</div>
     `;
+    const dash = document.createElement("div");
+    dash.id = "os021-seo-root";
+    root.replaceChildren(meta, dash);
+    if (global.Os021Seo && typeof global.Os021Seo.mount === "function") {
+      global.Os021Seo.mount(dash, seoData);
+    } else {
+      dash.innerHTML = '<div class="note">SEO dashboard script missing.</div>';
+    }
   }
 
   async function boot(renderers) {

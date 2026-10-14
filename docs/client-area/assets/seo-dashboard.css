@@ -1,0 +1,34 @@
+/* OS-021 built-in SEO dashboard module (shape from OG-001-Steve PR 5 staging demo). */
+.os021-seo{--s-ink:#1A1A1A;--s-body:#374151;--s-muted:#5B6470;--s-line:#E5E7EB;--s-soft:#F1F5F9;--s-edge:#CBD5E1;color:var(--s-body);font-size:14px;line-height:1.5;margin:18px 0 8px}
+.os021-seo *{box-sizing:border-box}
+.os021-seo__banner{margin:0 0 12px;background:#FFF3CD;color:#664D03;border-bottom:2px solid #B58900;padding:10px 14px;font-weight:600}
+.os021-seo__title{font-size:1.55rem;font-weight:700;color:var(--s-ink);margin:0 0 4px}
+.os021-seo__meta{color:var(--s-muted);margin:0 0 14px;font-size:13.5px}
+.os021-seo__tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:10px;margin:0 0 16px}
+.os021-seo__tile{background:#fff;border:1px solid var(--s-line);border-left:3px solid #475569;border-radius:4px;padding:10px 12px}
+.os021-seo__tile b{display:block;font-size:1.55rem;line-height:1.2;color:var(--s-ink)}
+.os021-seo__tile span{font-size:12px;color:var(--s-muted)}
+.os021-seo__tablist{display:flex;gap:0;border-bottom:1px solid var(--s-line);margin:0 0 14px}
+.os021-seo__tablist button{
+  appearance:none;background:transparent;border:0;border-bottom:2px solid transparent;
+  padding:10px 16px;font-size:14px;font-weight:700;color:var(--s-muted);cursor:pointer;margin-bottom:-1px;
+}
+.os021-seo__tablist button[aria-selected="true"]{color:var(--s-ink);border-bottom-color:var(--og-green,#109200)}
+.os021-seo__panel{margin:0 0 12px}
+.os021-seo__panel[hidden]{display:none}
+.os021-seo .scroll{overflow-x:auto;margin:0 0 12px}
+.os021-seo table{border-collapse:collapse;width:100%;font-size:13px;min-width:720px}
+.os021-seo th,.os021-seo td{text-align:left;padding:10px 11px;border-bottom:1px solid var(--s-line);vertical-align:top}
+.os021-seo thead th{background:#111;color:#fff;font-size:11px;letter-spacing:.4px;text-transform:uppercase;font-weight:600}
+.os021-seo tbody tr:nth-child(even){background:var(--s-soft)}
+.os021-seo__kw{display:block;font-weight:700;color:var(--s-ink)}
+.os021-seo__role{display:inline-block;margin-top:3px;font-size:11px;font-weight:700;color:var(--s-muted);text-transform:uppercase;letter-spacing:.4px}
+.os021-seo__num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.os021-seo__eng{font-size:12px;white-space:nowrap}
+.os021-seo__s-cited{color:#047857}
+.os021-seo__s-mentioned{color:#B45309}
+.os021-seo__s-not-cited,.os021-seo__s-no-ai-answer{color:var(--s-muted)}
+.os021-seo__lede,.os021-seo__foot{font-size:13px;color:var(--s-muted);margin:8px 0 0}
+.os021-seo__empty-state{border:1.5px dashed #cdd3c9;border-radius:12px;padding:28px 24px;background:repeating-linear-gradient(45deg,#fafbf9,#fafbf9 12px,#f4f6f2 12px,#f4f6f2 24px)}
+.os021-seo__empty-state h3{margin:0 0 8px;color:var(--s-ink)}
+.os021-seo__empty-state p{margin:0;color:var(--s-muted);font-size:14px}

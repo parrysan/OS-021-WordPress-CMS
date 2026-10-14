@@ -1,0 +1,821 @@
+{
+  "instance_id": "steve",
+  "data_nature": "dummy",
+  "market": "UK",
+  "source": "Demonstration values mirrored from OG-001-Steve staging SEO tracking (PR 5). Nothing is tracked or fetched.",
+  "synced_at": "2026-10-14T11:57:36Z",
+  "totals": {
+    "keywords": 27,
+    "ranking": 5,
+    "top40": 1,
+    "top10": 0,
+    "impressions": 63,
+    "clicks": 1,
+    "cited": 1,
+    "mentioned": 2,
+    "aeo_checks": 101
+  },
+  "engines": [
+    "ChatGPT",
+    "Perplexity",
+    "Google AI Overviews",
+    "Claude"
+  ],
+  "keywords": [
+    {
+      "phrase": "ladder of inference",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 1,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Indexed"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 191,
+          "title": "The Ladder of Inference",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "ladder of inference at work",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 1,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Indexed"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 191,
+          "title": "The Ladder of Inference",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "how to influence decision makers",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 1,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Indexed"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 192,
+          "title": "Influencing the decision maker",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "influencing stakeholders",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 1,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Indexed"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 192,
+          "title": "Influencing the decision maker",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "leadership storytelling",
+      "role": "Primary",
+      "evidence": "UK 50 searches a month, difficulty 0\u20139 (Phase 0, 4 Oct 2026)",
+      "batch": 1,
+      "services": [
+        "Storytelling for Leaders",
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": 68,
+        "change": "New",
+        "impressions": 6,
+        "clicks": 0,
+        "status": "First shown"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Mentioned",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 193,
+          "title": "Deep Diving",
+          "status": "draft"
+        },
+        {
+          "id": 195,
+          "title": "Something They&#8217;ll Always Remember",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "storytelling for leaders",
+      "role": "Secondary",
+      "evidence": "UK 50 / US 140 searches a month, difficulty 0\u20134 (Phase 0, 4 Oct 2026)",
+      "batch": 1,
+      "services": [
+        "Storytelling for Leaders"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Indexed"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 193,
+          "title": "Deep Diving",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "curiosity in leadership",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 1,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": 34,
+        "change": "+9",
+        "impressions": 41,
+        "clicks": 1,
+        "status": "Top 40"
+      },
+      "aeo": {
+        "chatgpt": "Mentioned",
+        "perplexity": "Cited",
+        "ai_overviews": "No AI answer",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 194,
+          "title": "Curiosity wins the day",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "memorable presentation ideas",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 1,
+      "services": [
+        "Storytelling for Leaders",
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Indexed"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 195,
+          "title": "Something They&#8217;ll Always Remember",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "presentation structure for leaders",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 1,
+      "services": [
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Indexed"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 196,
+          "title": "Presentation Structures",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "sparkline presentation",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 1,
+      "services": [
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Indexed"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "No AI answer",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 196,
+          "title": "Presentation Structures",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "influencing without selling",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 2,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": 91,
+        "change": "New",
+        "impressions": 3,
+        "clicks": 0,
+        "status": "First shown"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "No AI answer",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 204,
+          "title": "Let&#8217;s Swap Balloons",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "how to build trust with clients",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 2,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "No AI answer",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 205,
+          "title": "Persona Impact Model",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "listening skills for leaders",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 2,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 205,
+          "title": "Persona Impact Model",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "communicating change",
+      "role": "Primary",
+      "evidence": "UK 140 searches a month (110 for \"communicating change management\"), difficulty 2\u20133 (Phase 0, 4 Oct 2026)",
+      "batch": 2,
+      "services": [
+        "Communicating Change",
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": 83,
+        "change": "New",
+        "impressions": 4,
+        "clicks": 0,
+        "status": "First shown"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 206,
+          "title": "The Brain",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "staying calm under pressure leadership",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 2,
+      "services": [
+        "Communicating Change",
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 206,
+          "title": "The Brain",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "impactful presentation skills",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 2,
+      "services": [
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 207,
+          "title": "Basic Concepts for Impactful Presenting",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "data storytelling for leaders",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 2,
+      "services": [
+        "Storytelling for Leaders",
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 208,
+          "title": "From the slides to the story",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "leadership lessons from Philippe Petit",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 2,
+      "services": [
+        "Storytelling for Leaders"
+      ],
+      "seo": {
+        "position": 57,
+        "change": "New",
+        "impressions": 9,
+        "clicks": 0,
+        "status": "First shown"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "No AI answer",
+        "claude": "Mentioned"
+      },
+      "posts": [
+        {
+          "id": 209,
+          "title": "Leadership on a Wire",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "powerpoint tips for executives",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 2,
+      "services": [
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 210,
+          "title": "PowerPoint tips and tricks",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "building trust across cultures",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 0,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 211,
+          "title": "Gen Up",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "working with other cultures",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 0,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "No AI answer",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 211,
+          "title": "Gen Up",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "finding common ground at work",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 0,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 212,
+          "title": "At the Bar",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "common ground in difficult conversations",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 0,
+      "services": [
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 212,
+          "title": "At the Bar",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "overcoming resistance to change",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 0,
+      "services": [
+        "Communicating Change",
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 213,
+          "title": "Purposes, Concerns and Circumstances",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "why people resist change",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 0,
+      "services": [
+        "Communicating Change",
+        "Involving &amp; Influencing Others"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "No AI answer",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 213,
+          "title": "Purposes, Concerns and Circumstances",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "online presentation skills for leaders",
+      "role": "Primary",
+      "evidence": "",
+      "batch": 0,
+      "services": [
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 214,
+          "title": "Screen Presence",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "phrase": "screen presence for executives",
+      "role": "Secondary",
+      "evidence": "",
+      "batch": 0,
+      "services": [
+        "Town Hall &amp; Conference Speaker Coaching"
+      ],
+      "seo": {
+        "position": null,
+        "change": "\u2013",
+        "impressions": 0,
+        "clicks": 0,
+        "status": "Not yet ranking"
+      },
+      "aeo": {
+        "chatgpt": "Not cited",
+        "perplexity": "Not cited",
+        "ai_overviews": "Not cited",
+        "claude": "Not cited"
+      },
+      "posts": [
+        {
+          "id": 214,
+          "title": "Screen Presence",
+          "status": "draft"
+        }
+      ]
+    }
+  ]
+}

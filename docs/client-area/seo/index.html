@@ -7,6 +7,7 @@
 <title>SEO · WordPress CMS | Oganiko Digital</title>
 <link rel="stylesheet" href="../assets/client.css">
 <link rel="stylesheet" href="../assets/og-tab-rail.css">
+<link rel="stylesheet" href="../assets/seo-dashboard.css">
 </head>
 <body>
 <header><div class="wrap">
@@ -33,8 +34,8 @@
 
 <main class="wrap">
   <h2 style="margin-top:10px">SEO</h2>
-  <p class="lead">Per-instance SEO dashboard — URL and summary declared on that instance's feed.</p>
-  <p>For Steve: staging SEO tracking dashboard from OG-001-Steve (PR 5 mu-plugin). Demonstration / dummy values only — this tab does not start rank tracking or spend DataForSEO credit.</p>
+  <p class="lead">Built-in OS-021 SEO dashboard — present for every instance by default.</p>
+  <p>Fed by <code>src/wp/instances/&lt;id&gt;.seo.json</code>. Empty-state when an instance has no data. Steve currently uses demonstration values mirrored from OG-001-Steve PR 5 (no rank tracking, no DataForSEO spend).</p>
   <div id="seo-panel"></div>
 </main>
 
@@ -42,6 +43,7 @@
   <span>© 2026 <span class="brand">Oganiko Digital</span> · OS-021-WordPress-CMS</span>
   <span>Private project workspace</span>
 </div></footer>
+<script src="../assets/seo-dashboard.js"></script>
 <script src="../assets/instance.js"></script>
 <script>
   WpCms.boot([WpCms.renderSeo]);

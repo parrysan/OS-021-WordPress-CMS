@@ -166,35 +166,76 @@ echo json_encode($blocks);
     except Exception:
         local_json = ""
 
-# SEO summary: instance-specific helpers when present (Steve staging demo); never call paid APIs.
+# Built-in SEO module data file (instances/<id>.seo.json). Never call paid APIs.
 seo_summary = None
-seo_notes = "Per-instance SEO dashboard URL. Populate summary from the site's own dashboard code when available; do not start rank tracking or spend DataForSEO credit from this sync."
+seo_notes = (
+    "OS-021 ships a built-in SEO Client Area module for every instance. "
+    "Populate instances/<id>.seo.json; empty-state when there is no data. "
+    "Do not start rank tracking or spend DataForSEO credit from this sync."
+)
 seo_nature = "none"
-seo_label = "SEO dashboard"
+seo_label = "SEO tracking (wp-admin staging mirror)"
 seo_page = ""
+seo_payload = {
+    "instance_id": iid,
+    "data_nature": "none",
+    "market": "",
+    "source": "SEO module present; no per-instance keyword data from this sync.",
+    "synced_at": None,
+    "totals": None,
+    "engines": ["ChatGPT", "Perplexity", "Google AI Overviews", "Claude"],
+    "keywords": [],
+}
 try:
     if wp('''eval 'echo function_exists("steve_seo_totals") ? "yes" : "no";' ''') == "yes":
-        seo_summary = json.loads(wp('''eval 'echo json_encode(steve_seo_totals());' '''))
-        if isinstance(seo_summary, dict) and "checks" in seo_summary:
-            seo_summary = {
-                "keywords": seo_summary.get("keywords"),
-                "ranking": seo_summary.get("ranking"),
-                "top40": seo_summary.get("top40"),
-                "top10": seo_summary.get("top10"),
-                "impressions": seo_summary.get("impressions"),
-                "clicks": seo_summary.get("clicks"),
-                "cited": seo_summary.get("cited"),
-                "mentioned": seo_summary.get("mentioned"),
-                "aeo_checks": seo_summary.get("checks"),
-            }
+        raw_totals = json.loads(wp('''eval 'echo json_encode(steve_seo_totals());' '''))
+        seo_summary = {
+            "keywords": raw_totals.get("keywords"),
+            "ranking": raw_totals.get("ranking"),
+            "top40": raw_totals.get("top40"),
+            "top10": raw_totals.get("top10"),
+            "impressions": raw_totals.get("impressions"),
+            "clicks": raw_totals.get("clicks"),
+            "cited": raw_totals.get("cited"),
+            "mentioned": raw_totals.get("mentioned"),
+            "aeo_checks": raw_totals.get("checks"),
+        }
         seo_nature = "dummy"
-        seo_label = "SEO tracking (wp-admin, staging demo)"
         seo_page = "/wp-admin/admin.php?page=steve-seo-tracking"
         seo_notes = (
-            "Staging Open Search-style keyword tracking (mu-plugin). "
-            "Hand-set demonstration values; nothing is tracked or fetched. "
-            "Opt-in when WP_ENVIRONMENT_TYPE=staging."
+            "Built-in OS-021 SEO module with demonstration values mirrored from "
+            "OG-001-Steve staging SEO tracking (PR 5). Nothing is tracked or fetched."
         )
+        kw_json = wp(r'''eval '
+$rows = [];
+foreach (steve_seo_keywords() as $key => $row) {
+  [$pos, $chg, $imp, $clk, $st] = steve_seo_simulated_seo($key, $row["batch"]);
+  $aeo = steve_seo_simulated_aeo($key);
+  $posts = [];
+  foreach ($row["posts"] as $p) {
+    $posts[] = ["id"=>$p->ID,"title"=>get_the_title($p),"status"=>$p->post_status];
+  }
+  $svc = function_exists("steve_seo_service_names") ? array_values(steve_seo_service_names($row["posts"])) : [];
+  $rows[] = [
+    "phrase"=>$row["phrase"],"role"=>$row["role"],"evidence"=>$row["evidence"]??"",
+    "batch"=>$row["batch"],"services"=>$svc,
+    "seo"=>["position"=>$pos,"change"=>$chg,"impressions"=>$imp,"clicks"=>$clk,"status"=>$st],
+    "aeo"=>["chatgpt"=>$aeo[0],"perplexity"=>$aeo[1],"ai_overviews"=>$aeo[2],"claude"=>$aeo[3]],
+    "posts"=>$posts,
+  ];
+}
+echo json_encode($rows);
+' ''')
+        seo_payload = {
+            "instance_id": iid,
+            "data_nature": "dummy",
+            "market": "UK",
+            "source": "Demonstration values mirrored from OG-001-Steve staging SEO tracking (PR 5). Nothing is tracked or fetched.",
+            "synced_at": datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "totals": seo_summary,
+            "engines": ["ChatGPT", "Perplexity", "Google AI Overviews", "Claude"],
+            "keywords": json.loads(kw_json),
+        }
 except Exception:
     pass
 
@@ -247,7 +288,9 @@ feed = {
         "blocks": blocks,
     } if acf_active or groups else None,
     "seo": {
-        "dashboard_url": (sanitized + seo_page) if seo_page else "",
+        "module": "built-in",
+        "data_file": f"instances/{iid}.seo.json",
+        "wp_admin_dashboard_url": (sanitized + seo_page) if seo_page else "",
         "dashboard_label": seo_label,
         "data_nature": seo_nature,
         "notes": seo_notes,
@@ -271,9 +314,11 @@ local = {
         "admin_url": base + "/wp-admin/",
     },
     "seo": {
-        "dashboard_url": (base + seo_page) if seo_page else "",
+        "wp_admin_dashboard_url": (base + seo_page) if seo_page else "",
     },
 }
+
+out_seo = os.path.join(os.path.dirname(out_tracked), f"{iid}.seo.json")
 
 os.makedirs(os.path.dirname(out_tracked), exist_ok=True)
 with open(out_tracked, "w") as f:
@@ -282,10 +327,14 @@ with open(out_tracked, "w") as f:
 with open(out_local, "w") as f:
     json.dump(local, f, indent=2)
     f.write("\n")
+with open(out_seo, "w") as f:
+    json.dump(seo_payload, f, indent=2)
+    f.write("\n")
 
 print(f"wrote {out_tracked}")
 print(f"wrote {out_local} (gitignored)")
-print(f"plugins={len(plugins)} themes={len(themes)} acf_groups={len(groups)} acf_blocks={len(blocks)}")
+print(f"wrote {out_seo} (built-in SEO module data)")
+print(f"plugins={len(plugins)} themes={len(themes)} acf_groups={len(groups)} acf_blocks={len(blocks)} seo_keywords={len(seo_payload.get('keywords') or [])}")
 PY
 
 # Keep catalog status in sync for known ids

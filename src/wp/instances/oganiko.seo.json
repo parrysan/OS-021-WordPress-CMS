@@ -1,0 +1,15 @@
+{
+  "instance_id": "oganiko",
+  "data_nature": "none",
+  "market": "",
+  "source": "Not connected yet \u2014 SEO module is present; no per-instance data.",
+  "synced_at": null,
+  "totals": null,
+  "engines": [
+    "ChatGPT",
+    "Perplexity",
+    "Google AI Overviews",
+    "Claude"
+  ],
+  "keywords": []
+}

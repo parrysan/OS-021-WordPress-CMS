@@ -20,12 +20,14 @@
       document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
     })();
   </script>
+  <div id="instance-switcher" class="instance-switcher"></div>
   <nav class="og-tab-rail">
     <a href="../">Overview</a>
     <a href="../plugins/">Installed Plugins</a>
     <a href="../themes/">Themes</a>
     <a href="./" aria-current="page">Settings</a>
     <a href="../acf/">ACF</a>
+    <a href="../seo/">SEO</a>
   </nav>
 </div></header>
 
@@ -42,7 +44,7 @@
 </div></footer>
 <script src="../assets/instance.js"></script>
 <script>
-  WpCms.loadInstance().then(function (data) { WpCms.renderSettings(data || {}); });
+  WpCms.boot([WpCms.renderSettings]);
 </script>
 </body>
 </html>

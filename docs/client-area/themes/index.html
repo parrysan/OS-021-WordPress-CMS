@@ -20,19 +20,21 @@
       document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
     })();
   </script>
+  <div id="instance-switcher" class="instance-switcher"></div>
   <nav class="og-tab-rail">
     <a href="../">Overview</a>
     <a href="../plugins/">Installed Plugins</a>
     <a href="./" aria-current="page">Themes</a>
     <a href="../settings/">Settings</a>
     <a href="../acf/">ACF</a>
+    <a href="../seo/">SEO</a>
   </nav>
 </div></header>
 
 <main class="wrap">
   <h2 style="margin-top:10px">Themes</h2>
-  <p class="lead">Themes installed on the linked WordPress instance.</p>
-  <p>Source: <code>wp theme list --format=json</code>.</p>
+  <p class="lead">Themes installed on the selected WordPress instance.</p>
+  <p>Source: <code>wp theme list --format=json</code> via the sync script.</p>
   <div id="themes-list"></div>
 </main>
 
@@ -42,7 +44,7 @@
 </div></footer>
 <script src="../assets/instance.js"></script>
 <script>
-  WpCms.loadInstance().then(function (data) { WpCms.renderThemes(data || {}); });
+  WpCms.boot([WpCms.renderThemes]);
 </script>
 </body>
 </html>

@@ -30,7 +30,7 @@ created: "2026-09-12"
 - **Autonomy mode**: `co-pilot` — Phil drives, agent assists. See master prompt.
 - **Purpose** (one sentence): Make a WordPress CMS operable via an agent.
 - **Client dashboard**: _(not applicable — internal AIOS infrastructure)_
-- **Last touched**: `2026-10-07`
+- **Last touched**: `2026-10-14`
 
 ---
 
@@ -52,12 +52,13 @@ created: "2026-09-12"
 
 > **Operational facts that should never have to be re-discovered.** Deployed URLs, store handles, theme IDs, API endpoints, credentials *location* (never the credentials themselves — those live in the global `.env`, see global AGENT.md §2.5). Update this section whenever a fact changes — it is the canonical source.
 
-- **Production URL**: none yet
-- **Client area**: `docs/client-area/` (Overview + Installed Plugins + Themes + Settings + ACF — Client Area style)
-- **Staging / preview URL**: http://127.0.0.1:8022/docs/client-area/ (`python3 -m http.server 8022 --bind 127.0.0.1` from repo root); WordPress instance on the Studio via Tailscale Serve (real host in gitignored `src/wp/instance.local.json`; repo is public, keep tailnet details out of tracked files)
-- **Platform handle / project ID**: none yet
+- **Production URL**: per instance — Steve → https://steveapps.co/ (connected); oganiko.com → https://oganiko.com/ (stub, not connected yet)
+- **Instances**: catalog `src/wp/instances.json`; feeds `src/wp/instances/<id>.json`; real Studio/Tailscale hosts only in gitignored `src/wp/instances/<id>.local.json`; sync `./src/wp/sync-instance.sh <id>` (WP-CLI read-only against Docker; no secrets in tracked files)
+- **Client area**: `docs/client-area/` (Overview + Installed Plugins + Themes + Settings + ACF + built-in SEO module — instance switcher in header; SEO fed by `src/wp/instances/<id>.seo.json`)
+- **Staging / preview URL**: http://127.0.0.1:8022/docs/client-area/ (`python3 -m http.server 8022 --bind 127.0.0.1` from repo root); WordPress on the Studio via Tailscale Serve (hosts in `*.local.json` only; repo is public)
+- **Platform handle / project ID**: first instance `steve` (OG-001-Steve / steveapps Docker); second stub `oganiko` (OG-019)
 - **Other identifiers**: architecture lock in `OS-000-RES/docs/intelligence/reports/2026-08-23-research-ai-wordpress-cms.md` — WP binding · Studio + MCP/skills · hybrid/block + ACF
-- **Credentials**: stored in global `.env` under `WP_CMS_*` (none yet)
+- **Credentials**: stored in global `.env` under `WP_CMS_*` (none yet for oganiko; Steve uses local Docker — no WP passwords in this repo)
 - **GitHub**: https://github.com/parrysan/OS-021-WordPress-CMS
 - **NotebookLM**: (not provisioned — opt-in, add later)
 
@@ -70,7 +71,7 @@ Depends on project scope — no default web stack. Define as needed.
 Working defaults (from locked research, refine as facts emerge):
 - **CMS binding**: WordPress (classic/hybrid + ACF; not ZipWP/Elementor Angie)
 - **Agent loop**: WordPress Studio + Studio MCP/skills + WP-CLI
-- **Operator UI**: Client Area under `docs/client-area/` (STR-style hub; tabs for Installed Plugins, Themes, Settings, ACF)
+- **Operator UI**: Client Area under `docs/client-area/` (STR-style hub; instance switcher; tabs for Installed Plugins, Themes, Settings, ACF, SEO)
 - **Front tokens**: OS-000 Design System (sites are theme-neutral + own brand — not OGANIKO green)
 
 ---
@@ -100,4 +101,4 @@ Working defaults (from locked research, refine as facts emerge):
 
 > **Optional, ephemeral.** A 2–3 line free-form scratch pad of "where I left off" — not durable knowledge. Durable decisions belong in the vault project page. Wipe and rewrite freely.
 
-Linked 2026-10-07: Studio oganiko clone synced into `src/wp/instance.json` (site, admin, plugins, themes, settings, ACF).
+2026-10-14: Multi-instance model — Steve (steveapps Docker) is the first connected feed; oganiko stubbed not connected yet. SEO tab per instance.

@@ -1,15 +1,29 @@
-# WordPress instance snapshot
+# WordPress instance feeds
 
-`instance.json` is the operator UI’s live config feed (`docs/project-page/`).
+OS-021 supports several named instances. The Client Area switches between them.
 
-Populate from a linked WordPress Studio site, e.g.:
+| File | Role |
+|---|---|
+| `instances.json` | Catalog (ids, names, status, feed paths, sync container) |
+| `instances/<id>.json` | Tracked feed for that instance (placeholder hosts; no secrets) |
+| `instances/<id>.seo.json` | Built-in SEO module data (keywords / totals); empty-state when none |
+| `instances/<id>.local.json` | Gitignored overlay with real Studio / Tailscale host URLs |
+| `sync-instance.sh` | Read-only WP-CLI sync against a Docker container |
+
+The SEO Client Area tab is a **default OS-021 module** — every catalogued instance gets it automatically. New instances only need a catalog entry plus feeds; the SEO tab needs no extra wiring.
+
+## Sync (read-only)
 
 ```bash
-wp plugin list --format=json
-wp theme list --format=json
-wp option get blogname
+./src/wp/sync-instance.sh steve
 ```
 
-Wire a small sync script here later; keep secrets out of this file (URLs only, no passwords).
+Requires Docker and a running container named in `instances.json` → `sync.container`.
+The script downloads WP-CLI into the container's `/tmp` if needed, reads plugins / themes /
+settings / ACF (presence + field groups + blocks; never licence keys), and writes the feed.
+Real hosts land only in `*.local.json`.
 
-The tracked `instance.json` holds placeholder URLs (`<studio-tailnet-host>`) because this repo is public. To show the real host in the Client Area, put the real `site.url` / `site.admin_url` in `instance.local.json` next to it. That file is gitignored and overlays `instance.json` when present. Without it the Client Area shows "Host not configured" and hides the WP Admin link.
+## Legacy
+
+The single-file `instance.json` + `instance.local.json` shape is retired. Use the catalog +
+per-instance feeds above.

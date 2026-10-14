@@ -20,19 +20,21 @@
       document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
     })();
   </script>
+  <div id="instance-switcher" class="instance-switcher"></div>
   <nav class="og-tab-rail">
     <a href="../">Overview</a>
     <a href="../plugins/">Installed Plugins</a>
     <a href="../themes/">Themes</a>
     <a href="../settings/">Settings</a>
     <a href="./" aria-current="page">ACF</a>
+    <a href="../seo/">SEO</a>
   </nav>
 </div></header>
 
 <main class="wrap">
   <h2 style="margin-top:10px">ACF</h2>
   <p class="lead">Advanced Custom Fields — the preferred client-edit surface.</p>
-  <p>Clients get fields, not the Site Editor. Prefer ACF Local JSON so field groups stay in git and agents can operate them via WP-CLI.</p>
+  <p>Clients get fields, not the Site Editor. Prefer ACF Local JSON so field groups stay in git and agents can operate them via WP-CLI. ACF Pro presence is recorded without printing the licence.</p>
   <div id="acf-status"></div>
 </main>
 
@@ -42,7 +44,7 @@
 </div></footer>
 <script src="../assets/instance.js"></script>
 <script>
-  WpCms.loadInstance().then(function (data) { WpCms.renderAcf(data || {}); });
+  WpCms.boot([WpCms.renderAcf]);
 </script>
 </body>
 </html>

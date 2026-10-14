@@ -20,24 +20,26 @@
       document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
     })();
   </script>
+  <div id="instance-switcher" class="instance-switcher"></div>
   <nav class="og-tab-rail">
     <a href="./" aria-current="page">Overview</a>
     <a href="plugins/">Installed Plugins</a>
     <a href="themes/">Themes</a>
     <a href="settings/">Settings</a>
     <a href="acf/">ACF</a>
+    <a href="seo/">SEO</a>
   </nav>
 </div></header>
 
 <main class="wrap">
   <h2 style="margin-top:10px">Workspaces</h2>
-  <p class="lead">Agent-operable WordPress control plane: admin access, live config, and the surfaces an agent needs to build and maintain a site.</p>
+  <p class="lead">Agent-operable WordPress control plane across named instances — Steve first, oganiko.com next.</p>
 
   <div class="cards-gateway">
     <a class="card card-gateway" id="wp-admin-link" href="#" target="_blank" rel="noopener" aria-disabled="true">
       <span class="kicker">01 · WordPress</span>
       <h3>WP Admin</h3>
-      <p>Jump into the linked WordPress admin. Enabled once a Studio site URL is connected.</p>
+      <p>Jump into the selected instance admin. Enabled once a host URL is configured (local overlay).</p>
       <span class="go">Open WP Admin ↗</span>
     </a>
     <a class="card card-gateway" href="plugins/">
@@ -58,27 +60,37 @@
       <p>Advanced Custom Fields + Local JSON — fields for clients, not the Site Editor.</p>
       <span class="go">Open ACF →</span>
     </a>
+    <a class="card card-gateway" href="seo/">
+      <span class="kicker">05 · Search</span>
+      <h3>SEO dashboard</h3>
+      <p>Built-in OS-021 module for every instance — keyword SEO/AEO tables from that instance's data file.</p>
+      <span class="go">Open SEO →</span>
+    </a>
   </div>
 
   <h2>Instance</h2>
-  <p>Linked WordPress Studio site and sync status. Feed: <code>src/wp/instance.json</code>.</p>
+  <p>Selected WordPress site and sync status. Catalog: <code>src/wp/instances.json</code>; feeds under <code>src/wp/instances/</code>.</p>
   <dl class="meta-grid">
+    <div><dt>Name</dt><dd id="instance-name">—</dd></div>
+    <div><dt>Status</dt><dd id="instance-status">—</dd></div>
+    <div><dt>Project</dt><dd id="instance-project">—</dd></div>
     <div><dt>Site URL</dt><dd id="site-url">— not linked yet —</dd></div>
     <div><dt>Admin URL</dt><dd id="admin-url">— not linked yet —</dd></div>
+    <div><dt>Production URL</dt><dd id="production-url">—</dd></div>
     <div><dt>WP version</dt><dd id="wp-version">—</dd></div>
     <div><dt>PHP</dt><dd id="php-version">—</dd></div>
-    <div><dt>Environment</dt><dd id="environment">local / Studio</dd></div>
+    <div><dt>Environment</dt><dd id="environment">—</dd></div>
     <div><dt>Last sync</dt><dd id="last-sync">never</dd></div>
   </dl>
 
   <h2>The project</h2>
-  <p><strong>WordPress CMS</strong> (OS-021) makes a WordPress instance operable via an agent. WordPress is the CMS binding; the agent loop is WordPress Studio + WP-CLI / MCP skills; client edit prefers ACF Local JSON over the Site Editor. Fronts pull OS-000 tokens — sites are theme-neutral plus their own brand, not OGANIKO green.</p>
-  <p>This Client Area is the single place where instance admin access and configuration surfaces come together. Each area has its own tab. Where a WordPress site is linked, panels fill from the snapshot; until then, spaces are reserved.</p>
+  <p><strong>WordPress CMS</strong> (OS-021) makes WordPress instances operable via an agent. WordPress is the CMS binding; the agent loop is Docker / Studio + WP-CLI; client edit prefers ACF Local JSON over the Site Editor. Fronts pull OS-000 tokens — sites are theme-neutral plus their own brand, not OGANIKO green.</p>
+  <p>This Client Area is the single place where instance admin access and configuration surfaces come together. Switch instances in the header. Where a WordPress site is linked, panels fill from that instance's feed; stubs stay marked not connected yet.</p>
 
   <h2>Where things stand</h2>
-  <div class="status"><b>Linked.</b> oganiko WordPress clone on the Studio. Panels read <code>src/wp/instance.json</code>.</div>
+  <div class="status" id="where-things-stand"><b>Loading…</b></div>
 
-  <div class="note">This area is private (<code>noindex</code>) and intended for project stakeholders. It is a living workspace — sections fill out as the WordPress instance is linked.</div>
+  <div class="note">This area is private (<code>noindex</code>) and intended for project stakeholders. Tailnet hosts live only in gitignored <code>*.local.json</code> overlays — the repo is public.</div>
 </main>
 
 <footer><div class="wrap">
@@ -87,7 +99,7 @@
 </div></footer>
 <script src="assets/instance.js"></script>
 <script>
-  WpCms.loadInstance().then(function (data) { WpCms.applyOverview(data || {}); });
+  WpCms.boot([WpCms.applyOverview]);
 </script>
 </body>
 </html>

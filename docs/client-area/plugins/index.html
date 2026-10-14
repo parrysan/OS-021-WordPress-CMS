@@ -20,19 +20,21 @@
       document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
     })();
   </script>
+  <div id="instance-switcher" class="instance-switcher"></div>
   <nav class="og-tab-rail">
     <a href="../">Overview</a>
     <a href="./" aria-current="page">Installed Plugins</a>
     <a href="../themes/">Themes</a>
     <a href="../settings/">Settings</a>
     <a href="../acf/">ACF</a>
+    <a href="../seo/">SEO</a>
   </nav>
 </div></header>
 
 <main class="wrap">
   <h2 style="margin-top:10px">Installed Plugins</h2>
-  <p class="lead">Plugins currently on the linked WordPress instance.</p>
-  <p>Source: <code>wp plugin list --format=json</code> (or REST), written into <code>src/wp/instance.json</code>.</p>
+  <p class="lead">Plugins currently on the selected WordPress instance.</p>
+  <p>Source: read-only sync via <code>./src/wp/sync-instance.sh</code> (<code>wp plugin list --format=json</code>).</p>
 
   <div class="scroll">
     <table>
@@ -51,7 +53,7 @@
     </table>
   </div>
 
-  <div class="note">Rows are the last read-only sync in <code>src/wp/instance.json</code>. An update cell stays — when WordPress reports none.</div>
+  <div class="note">Rows are the last read-only sync in the selected instance feed. Licence keys are never written to tracked files.</div>
 </main>
 
 <footer><div class="wrap">
@@ -60,7 +62,7 @@
 </div></footer>
 <script src="../assets/instance.js"></script>
 <script>
-  WpCms.loadInstance().then(function (data) { WpCms.renderPluginsTable(data || {}); });
+  WpCms.boot([WpCms.renderPluginsTable]);
 </script>
 </body>
 </html>

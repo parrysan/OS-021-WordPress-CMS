@@ -1,0 +1,24 @@
+{
+  "default": "steve",
+  "instances": [
+    {
+      "id": "steve",
+      "name": "Steve Apps",
+      "project": "OG-001-Steve",
+      "status": "connected",
+      "feed": "instances/steve.json",
+      "sync": {
+        "container": "steveapps-wordpress-1",
+        "wp_path": "/var/www/html"
+      }
+    },
+    {
+      "id": "oganiko",
+      "name": "oganiko.com",
+      "project": "OG-019",
+      "status": "not_connected",
+      "feed": "instances/oganiko.json",
+      "sync": null
+    }
+  ]
+}

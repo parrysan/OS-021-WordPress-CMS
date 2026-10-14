@@ -1,0 +1,34 @@
+{
+  "id": "oganiko",
+  "name": "oganiko.com",
+  "project": "OG-019",
+  "status": "not_connected",
+  "source": "stub — not connected yet (do not touch live oganiko.com or its DNS)",
+  "synced_at": null,
+  "site": {
+    "url": "",
+    "admin_url": "",
+    "wp_version": "",
+    "php_version": "",
+    "environment": "not connected yet",
+    "production_url": "https://oganiko.com/"
+  },
+  "plugins": [],
+  "themes": [],
+  "settings": {},
+  "acf": null,
+  "seo": {
+    "dashboard_url": "",
+    "dashboard_label": "SEO dashboard (not connected yet)",
+    "data_nature": "none",
+    "notes": "Declare this instance's SEO dashboard URL once OG-019 WordPress is linked. Pattern matches Steve: per-instance seo.dashboard_url in the feed.",
+    "summary": null
+  },
+  "connection_needed": [
+    "Hosting / Docker or Studio site identity for the OG-019 WordPress binding (not the public DNS cutover)",
+    "WP-CLI-reachable container or path for a read-only sync (same pattern as steveapps-wordpress-1)",
+    "Whether production is still the marketing front vs a separate CMS host",
+    "Credentials location in global .env under WP_CMS_* (never commit secrets)",
+    "SEO dashboard URL for this instance once an Open Search / staging tracker exists"
+  ]
+}

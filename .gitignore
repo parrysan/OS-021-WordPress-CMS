@@ -57,3 +57,6 @@ coverage/
 
 # Real Studio host details (public repo) — local override read by the Client Area
 src/wp/instance.local.json
+
+src/wp/instances/*.local.json
+.impeccable/hook.cache.json

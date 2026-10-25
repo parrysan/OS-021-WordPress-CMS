@@ -54,7 +54,7 @@ created: "2026-09-12"
 
 - **Production URL**: per instance — Steve → https://steveapps.co/ (connected); oganiko.com → https://oganiko.com/ (stub, not connected yet)
 - **Instances**: catalog `src/wp/instances.json`; feeds `src/wp/instances/<id>.json`; real Studio/Tailscale hosts only in gitignored `src/wp/instances/<id>.local.json`; sync `./src/wp/sync-instance.sh <id>` (WP-CLI read-only against Docker; no secrets in tracked files)
-- **Client area**: `docs/client-area/` (Overview + Installed Plugins + Themes + Settings + ACF + built-in SEO module — instance switcher in header; SEO fed by `src/wp/instances/<id>.seo.json`)
+- **Client area**: `docs/client-area/` (Overview + Installed Plugins + Themes + Settings + ACF + built-in SEO module + Activity — instance switcher in header; SEO fed by `src/wp/instances/<id>.seo.json`; Activity by the gitignored `src/wp/instances/<id>.log.jsonl`)
 - **Staging / preview URL**: http://127.0.0.1:8022/docs/client-area/ (`python3 -m http.server 8022 --bind 127.0.0.1` from repo root); WordPress on the Studio via Tailscale Serve (hosts in `*.local.json` only; repo is public)
 - **Platform handle / project ID**: first instance `steve` (OG-001-Steve / steveapps Docker); second stub `oganiko` (OG-019)
 - **Other identifiers**: architecture lock in `OS-000-RES/docs/intelligence/reports/2026-08-23-research-ai-wordpress-cms.md` — WP binding · Studio + MCP/skills · hybrid/block + ACF

@@ -6,7 +6,7 @@
 
 - **For working on this project**: read `AGENTS.md` in this folder. It is the canonical bootstrap manifest — it tells any agent (or human) which files to read and in what order. `CLAUDE.md` is a one-line shim that imports it.
 - **For project status, decisions, and history**: see the vault project page at `vault/projects/OS-021-WordPress-CMS/README.md`.
-- **Client Area**: open http://127.0.0.1:8022/docs/client-area/ — instance switcher + Overview, Plugins, Themes, Settings, ACF, SEO. Feeds: `src/wp/instances/`.
+- **Client Area**: open http://127.0.0.1:8022/docs/client-area/ — instance switcher + Overview, Plugins, Themes, Settings, ACF, SEO, Activity. Feeds: `src/wp/instances/`. Agent writes go through `./src/wp/wp-write.sh` (see `src/wp/README.md`).
 
 ## Quick facts
 

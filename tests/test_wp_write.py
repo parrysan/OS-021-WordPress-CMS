@@ -262,6 +262,12 @@ class WpWriteTest(unittest.TestCase):
         self.assertEqual(self.wp_calls(), [["post", "list"]])
         self.assertEqual(self.log(), [])
 
+    def test_reads_filtered_by_publish_status_are_not_gated(self):
+        res = self.run_write("pilot", "post", "list", "--post_status=publish")
+        self.assertEqual(res.returncode, 0, res.stderr)
+        self.assertEqual(self.wp_calls(), [["post", "list", "--post_status=publish"]])
+        self.assertEqual((self.log(), self.pending()), ([], []))
+
     def test_failed_write_is_logged(self):
         res = self.run_write("pilot", "fail", "now")
         self.assertEqual(res.returncode, 1)

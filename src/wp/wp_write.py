@@ -118,7 +118,7 @@ def classify(args):
     risky_at = next((i for i, w in enumerate(pos[1:4], 1) if w in RISKY_VERBS), None)
     if risky_at and not is_trash_delete(args):
         return "risky", f"{shlex.join(pos[:risky_at + 1])} is permanent (no trash)"
-    if noun == "post" and (flag_value(args, "post_status") or "") in PUBLISH_STATUSES:
+    if noun == "post" and verb not in READ_VERBS and (flag_value(args, "post_status") or "") in PUBLISH_STATUSES:
         return "risky", f"makes content public (post_status={flag_value(args, 'post_status')})"
     if noun in READ_NOUNS or verb in READ_VERBS or (noun and not verb):
         return "read", ""

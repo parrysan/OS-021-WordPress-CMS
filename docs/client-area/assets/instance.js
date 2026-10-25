@@ -408,7 +408,7 @@
     }
     const rows = entries.slice(-50).reverse();
     logRoot.innerHTML = `<div class="scroll"><table>
-      <thead><tr><th>Time (UTC)</th><th>Actor</th><th>Command</th><th>Status</th><th>Note</th></tr></thead>
+      <thead><tr><th scope="col">Time (UTC)</th><th scope="col">Actor</th><th scope="col">Command</th><th scope="col">Status</th><th scope="col">Note</th></tr></thead>
       <tbody>${rows.map((e) => {
         const note = [
           e.reason,

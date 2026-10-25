@@ -36,9 +36,9 @@
   <section aria-label="Activity">
     <p class="lead" style="margin-top:10px">Every agent write to the selected instance, newest first.</p>
     <p>Agents change WordPress only through <code>./src/wp/wp-write.sh &lt;id&gt; &lt;wp-cli args&gt;</code>. New posts land as drafts and deletes go to the trash. Risky writes (permanent deletes, SQL, uninstalls, <code>--force</code>, publishing) wait here until a human approves them at a terminal.</p>
-    <h3>Waiting for approval</h3>
-    <div id="activity-pending"></div>
-    <h3>Last 50 writes</h3>
+    <h2>Waiting for approval</h2>
+    <div id="activity-pending" class="activity-pending"></div>
+    <h2>Last 50 writes</h2>
     <div id="activity-log"></div>
     <div class="note">Source: <code>src/wp/instances/&lt;id&gt;.log.jsonl</code>, append-only and gitignored (it never reaches the public repo). Secret-looking values are masked before they are written.</div>
   </section>

@@ -64,3 +64,7 @@ src/wp/instances/*.local.json
 # Agent write state (wp-write.sh): activity log + approvals waiting — per machine, never tracked
 src/wp/instances/*.log.jsonl
 src/wp/instances/*.pending/
+
+# Python
+__pycache__/
+*.pyc

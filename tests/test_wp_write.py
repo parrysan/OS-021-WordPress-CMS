@@ -181,6 +181,7 @@ class WpWriteTest(unittest.TestCase):
             ["language", "plugin", "uninstall", "akismet", "de_DE"],
             ["cron", "event", "delete", "my_hook"],
             ["user", "application-password", "delete", "1", "abc"],
+            ["post", "meta", "patch", "delete", "12", "settings", "color"],
             ["search-replace", "old", "new"],
             ["eval", "echo 1;"],
             ["plugin", "list", "--exec=unlink('x');"],

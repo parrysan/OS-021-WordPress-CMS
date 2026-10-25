@@ -21,11 +21,23 @@ FAKE_DOCKER = textwrap.dedent("""\
     with open(os.environ["FAKE_DOCKER_CALLS"], "a") as f:
         f.write(json.dumps(args) + "\\n")
     wp = args[args.index("--allow-root") + 1:] if "--allow-root" in args else []
-    if wp[:1] == ["fail"]:
+    state = json.loads(os.environ.get("FAKE_WP_STATE") or "{}")
+    field = next((a for a in wp if a.startswith("--field=")), None)
+    if wp[:1] == ["eval"]:
+        print(state.get("trash_days", 30))
+    elif wp[1:2] == ["get"] and field:
+        status = state.get(wp[0], {}).get(wp[2], "publish" if wp[0] == "post" else "1")
+        if status == "missing":
+            print("Error: Could not find the %s with ID %s." % (wp[0], wp[2]), file=sys.stderr)
+            sys.exit(1)
+        print(status)
+    elif wp[:1] == ["fail"]:
         print("Error: boom", file=sys.stderr)
         sys.exit(1)
-    if wp[:2] == ["post", "get"]:
+    elif wp[:2] == ["post", "get"]:
         print(json.dumps({"ID": int(wp[2]), "post_title": "Hello", "post_status": "publish"}))
+    elif wp[:3] == ["user", "application-password", "create"] and "--porcelain" in wp:
+        print("AppPassS3cret")
     elif wp[:2] == ["user", "create"]:
         print("Success: Created user 7.\\nPassword: s3cretGenerated")
     elif wp:
@@ -66,6 +78,9 @@ class WpWriteTest(unittest.TestCase):
 
     def tearDown(self):
         shutil.rmtree(self.tmp)
+
+    def set_wp_state(self, **state):
+        self.env["FAKE_WP_STATE"] = json.dumps(state)
 
     def run_write(self, *args, stdin=subprocess.DEVNULL):
         return subprocess.run([SCRIPT, *args], env=self.env, capture_output=True, text=True, stdin=stdin)
@@ -116,8 +131,38 @@ class WpWriteTest(unittest.TestCase):
     def test_post_delete_goes_to_trash_without_approval(self):
         res = self.run_write("pilot", "post", "delete", "12")
         self.assertEqual(res.returncode, 0, res.stderr)
-        self.assertEqual(self.wp_calls(), [["post", "delete", "12"]])
+        self.assertEqual(self.wp_calls()[-1], ["post", "delete", "12"])
         self.assertEqual(self.log()[-1]["defaults"], ["sent to trash"])
+
+    def test_comment_delete_goes_to_trash_without_approval(self):
+        res = self.run_write("pilot", "comment", "delete", "5")
+        self.assertEqual(res.returncode, 0, res.stderr)
+        self.assertEqual(self.wp_calls()[-1], ["comment", "delete", "5"])
+
+    def test_delete_that_would_be_permanent_waits_for_approval(self):
+        cases = [
+            ({"post": {"42": "trash"}}, ["post", "delete", "12", "42"], "already in trash"),
+            ({"comment": {"5": "trash"}}, ["comment", "delete", "5"], "already in trash"),
+            ({"comment": {"5": "spam"}}, ["comment", "delete", "5"], "already in spam"),
+            ({"post": {"99": "missing"}}, ["post", "delete", "99"], "could not read"),
+            ({"trash_days": 0}, ["post", "delete", "12"], "EMPTY_TRASH_DAYS=0"),
+            ({"trash_days": ""}, ["post", "delete", "12"], "could not confirm"),
+        ]
+        for state, args, reason in cases:
+            with self.subTest(args=args, state=state):
+                self.set_wp_state(**state)
+                res = self.run_write("pilot", *args)
+                self.assertEqual(res.returncode, 3, res.stderr)
+                self.assertIn(reason, res.stdout)
+                self.assertNotIn(args, self.wp_calls())
+                self.assertEqual(self.log()[-1]["status"], "awaiting_approval")
+
+    def test_approved_permanent_trash_delete_applies(self):
+        self.set_wp_state(post={"42": "trash"})
+        token = self.park("post", "delete", "42")
+        self.approve_at_terminal(token, "yes")
+        self.assertIn(["post", "delete", "42"], self.wp_calls())
+        self.assertEqual(self.log()[-1]["status"], "applied")
 
     # Approval gate
     def test_risky_writes_wait_and_do_not_run(self):
@@ -131,6 +176,11 @@ class WpWriteTest(unittest.TestCase):
             ["user", "delete", "3"],
             ["option", "delete", "blogname"],
             ["post", "meta", "delete", "12", "price"],
+            ["menu", "item", "delete", "12"],
+            ["language", "core", "uninstall", "de_DE"],
+            ["language", "plugin", "uninstall", "akismet", "de_DE"],
+            ["cron", "event", "delete", "my_hook"],
+            ["user", "application-password", "delete", "1", "abc"],
             ["search-replace", "old", "new"],
             ["eval", "echo 1;"],
             ["plugin", "list", "--exec=unlink('x');"],
@@ -221,8 +271,12 @@ class WpWriteTest(unittest.TestCase):
     def test_log_redacts_secrets(self):
         self.run_write("pilot", "user", "create", "bob", "b@example.test", "--user_pass=hunter2")
         self.run_write("pilot", "option", "update", "stripe_secret_key", "sk_live_abc")
+        self.run_write("pilot", "config", "set", "DB_PASSWORD", "dbpassXYZ")
+        self.run_write("pilot", "config", "set", "AUTH_KEY", "authkeyXYZ")
+        self.run_write("pilot", "user", "application-password", "create", "1", "bot", "--porcelain")
         blob = read_text(os.path.join(self.tmp, "instances", "pilot.log.jsonl"))
-        for secret in ("hunter2", "sk_live_abc", "s3cretGenerated"):
+        for secret in ("hunter2", "sk_live_abc", "s3cretGenerated", "dbpassXYZ", "authkeyXYZ",
+                       "AppPassS3cret"):
             self.assertNotIn(secret, blob)
         self.assertIn("--user_pass=***", blob)
 

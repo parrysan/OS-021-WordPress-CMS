@@ -43,15 +43,19 @@ Agents change a WordPress instance only through `wp-write.sh`, never raw `docker
   `instances/<id>.log.jsonl`: time, actor (`WP_WRITE_ACTOR`, default `agent`), command,
   status (`applied`, `failed`, `awaiting_approval`, `rejected`), defaults applied, approval
   and a short output. Secret-looking values (`--user_pass=`, `*key*`, `*secret*`, `*token*`,
-  generated passwords) are masked. The Client Area **Activity** tab shows the last 50.
+  generated passwords, `config set` secrets, `--porcelain` password output) are masked. The Client Area **Activity** tab shows the last 50.
 - **Approval gate.** Deletes that skip the trash, `--force`, uninstalls, `db query` / `reset` /
-  `import`, `search-replace` without `--dry-run`, `eval` / `shell` / `--exec`, and publishing
+  `import`, nested deletes / uninstalls (`post meta delete`, `menu item delete`,
+  `language core uninstall`, …), `search-replace` without `--dry-run`, `eval` / `shell` / `--exec`, and publishing
   (`--post_status=publish|future|private`) do not run. The wrapper prints a dry-run preview
   (the target's current state, read only), parks the write in `instances/<id>.pending/` and
   exits 3. Only a human at a terminal can apply it: `--approve` refuses when stdin is not a
   TTY and needs the word `yes`. Each token applies once.
 - **Safe defaults.** `post create` / `post generate` get `--post_status=draft` unless a status
-  is given. `post delete` and `comment delete` without `--force` go to the trash.
+  is given. `post delete` and `comment delete` without `--force` go to the trash. Before
+  running one, the wrapper reads each target's status: if a target is already in the trash
+  (or spam, for comments), cannot be read, or `EMPTY_TRASH_DAYS` is 0, WordPress would delete
+  it for good, so the write goes through the approval gate instead.
 
 The container comes from `instances.json` → `sync.container`, or from the gitignored
 `instances/<id>.local.json` → `sync.container` for a pilot that is not catalogued as

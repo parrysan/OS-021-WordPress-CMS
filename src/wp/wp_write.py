@@ -30,6 +30,8 @@ READ_VERBS = {
 }
 READ_NOUNS = {"help", "cli"}
 TRASHABLE = {"post", "comment"}
+TRASH_STATUS_FIELD = {"post": "post_status", "comment": "comment_approved"}
+ALREADY_TRASHED = {"post": {"trash"}, "comment": {"trash", "spam"}}
 DRAFT_DEFAULT = {("post", "create"), ("post", "generate")}
 PUBLISH_STATUSES = {"publish", "future", "private"}
 RISKY_VERBS = {"delete", "uninstall", "reset", "empty", "drop", "clean"}
@@ -54,7 +56,7 @@ def die(msg, code=EXIT_USAGE):
 
 
 def now():
-    return datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def resolve_instance(iid):
@@ -112,8 +114,9 @@ def classify(args):
         return "risky", "bulk SQL write (use --dry-run to preview)"
     if has_flag(args, "force"):
         return "risky", "--force skips safety checks (deletes skip the trash)"
-    if verb in RISKY_VERBS and not is_trash_delete(args):
-        return "risky", f"{noun} {verb} is permanent (no trash)"
+    risky_verb = next((w for w in positionals(args)[1:3] if w in RISKY_VERBS), None)
+    if risky_verb and not is_trash_delete(args):
+        return "risky", f"{shlex.join(positionals(args)[:3])} is permanent (no trash)"
     if noun == "post" and (flag_value(args, "post_status") or "") in PUBLISH_STATUSES:
         return "risky", f"makes content public (post_status={flag_value(args, 'post_status')})"
     if noun in READ_NOUNS or verb in READ_VERBS or (noun and not verb):
@@ -142,13 +145,15 @@ def redact_args(args):
             a = a.split("=", 1)[0] + "=***"
         elif not a.startswith("-"):
             pos.append(a)
-            if len(pos) > 1 and is_secret(pos[-2]) and pos[0] in ("option", "post", "user"):
+            if len(pos) > 1 and is_secret(pos[-2]) and pos[0] in ("option", "post", "user", "config"):
                 a = "***"
         out.append(a)
     return out
 
 
-def redact_output(text):
+def redact_output(text, args=()):
+    if has_flag(args, "porcelain") and any("password" in w for w in positionals(args)[:3]):
+        return "***"
     text = re.sub(r"(?i)(password:\s*)\S+", r"\1***", text or "")
     return text.strip()[:500]
 
@@ -179,6 +184,24 @@ class Instance:
         record = {"ts": now(), "instance": self.id, **entry}
         with open(self.log_path, "a") as f:
             f.write(json.dumps(record) + "\n")
+
+    def permanent_delete_reason(self, args):
+        """Why a trash delete would be permanent after all, or None when it goes to the trash."""
+        days = self.wp(["eval", "echo (int) EMPTY_TRASH_DAYS;"])
+        if days.returncode != 0 or not days.stdout.strip().isdigit():
+            return "could not confirm the trash is enabled (EMPTY_TRASH_DAYS)"
+        if int(days.stdout.strip()) == 0:
+            return "trash is disabled (EMPTY_TRASH_DAYS=0); delete would be permanent"
+        pos = positionals(args)
+        noun = pos[0]
+        for target in pos[2:]:
+            res = self.wp([noun, "get", target, f"--field={TRASH_STATUS_FIELD[noun]}"])
+            status = res.stdout.strip()
+            if res.returncode != 0 or not status:
+                return f"could not read {noun} {target} status; delete might be permanent"
+            if status in ALREADY_TRASHED[noun]:
+                return f"{noun} {target} is already in {status}; delete would be permanent"
+        return None
 
     def preview(self, args):
         """Best-effort dry run: what the risky command would touch. Reads only."""
@@ -211,7 +234,7 @@ def run_and_log(inst, args, kind, reason, defaults, approval=None):
         "kind": kind,
         "status": "applied" if res.returncode == 0 else "failed",
         "exit": res.returncode,
-        "output": redact_output(out),
+        "output": redact_output(out, args),
     }
     if reason:
         entry["reason"] = reason
@@ -232,6 +255,10 @@ def cmd_write(inst, args):
         sys.stdout.write(res.stdout)
         sys.stderr.write(res.stderr)
         return res.returncode
+    if kind == "write" and is_trash_delete(args):
+        reason = inst.permanent_delete_reason(args)
+        if reason:
+            kind = "risky"
     if kind == "risky":
         token = secrets.token_hex(4)
         preview = inst.preview(args)

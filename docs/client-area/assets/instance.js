@@ -38,6 +38,15 @@
     }
   }
 
+  async function fetchText(url) {
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      return res.ok ? await res.text() : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
   async function loadCatalog() {
     for (const base of feedBases()) {
       const data = await fetchJson(base + "instances.json");
@@ -112,6 +121,7 @@
     return {
       catalog,
       entry,
+      base,
       seoData,
       data: data || {
         id: entry.id,
@@ -355,6 +365,69 @@
     }
   }
 
+  function activityPill(status, settled) {
+    const s = String(status || "");
+    if (s === "applied") return '<span class="pill active">applied</span>';
+    if (s === "awaiting_approval" && settled) return '<span class="pill inactive">approval requested</span>';
+    if (s === "awaiting_approval") return '<span class="pill available">waiting for approval</span>';
+    return `<span class="pill inactive">${escapeHtml(s.replaceAll("_", " ") || "—")}</span>`;
+  }
+
+  function parseActivity(text) {
+    return String(text || "").split("\n").filter(Boolean).map((line) => {
+      try { return JSON.parse(line); } catch (_) { return null; }
+    }).filter(Boolean);
+  }
+
+  // A write is still waiting when its token has no later applied/failed/rejected entry.
+  function settledTokens(entries) {
+    return new Set(entries
+      .filter((e) => e.approval && e.status !== "awaiting_approval")
+      .map((e) => e.approval.token));
+  }
+
+  async function renderActivity(bundle) {
+    const logRoot = document.getElementById("activity-log");
+    const pendingRoot = document.getElementById("activity-pending");
+    if (!logRoot || !pendingRoot) return;
+    const entry = (bundle && bundle.entry) || {};
+    const text = bundle && bundle.base ? await fetchText(`${bundle.base}instances/${entry.id}.log.jsonl`) : null;
+    const entries = parseActivity(text);
+    const id = escapeHtml(entry.id || "<id>");
+    const settled = settledTokens(entries);
+    const waiting = entries.filter((e) => e.status === "awaiting_approval" && e.approval && !settled.has(e.approval.token));
+    pendingRoot.innerHTML = waiting.length
+      ? `<ul>${waiting.map((e) => `
+          <li><code>${escapeHtml(e.command || "")}</code> — ${escapeHtml(e.reason || "")}<br>
+          Requested by ${escapeHtml(e.actor || "—")} at ${escapeHtml(e.ts || "")}. Approve at a terminal: <code>./src/wp/wp-write.sh ${id} --approve ${escapeHtml(e.approval.token)}</code></li>
+        `).join("")}</ul>`
+      : '<p>Nothing waiting.</p>';
+    if (!entries.length) {
+      logRoot.innerHTML = `<div class="dataspace"><div class="lbl">No activity yet</div><h3>No agent writes logged</h3><p>Writes made with <code>./src/wp/wp-write.sh ${id} …</code> on this machine appear here.</p></div>`;
+      return;
+    }
+    const rows = entries.slice(-50).reverse();
+    logRoot.innerHTML = `<div class="scroll"><table>
+      <thead><tr><th>Time (UTC)</th><th>Actor</th><th>Command</th><th>Status</th><th>Note</th></tr></thead>
+      <tbody>${rows.map((e) => {
+        const note = [
+          e.reason,
+          (e.defaults || []).join(", "),
+          e.approval && e.approval.approved_by ? `approved by ${e.approval.approved_by}` : "",
+          e.approval && e.approval.rejected_by ? `rejected by ${e.approval.rejected_by}` : "",
+          e.status === "failed" ? e.output : "",
+        ].filter(Boolean).join(" · ");
+        return `<tr>
+          <td>${escapeHtml(String(e.ts || "—").replace("T", " ").replace("Z", ""))}</td>
+          <td>${escapeHtml(e.actor || "—")}</td>
+          <td><code>${escapeHtml(e.command || "")}</code></td>
+          <td>${activityPill(e.status, e.approval && settled.has(e.approval.token))}</td>
+          <td>${escapeHtml(note || "—")}</td>
+        </tr>`;
+      }).join("")}</tbody>
+    </table></div>`;
+  }
+
   async function boot(renderers) {
     const bundle = await loadInstance();
     mountSwitcher(bundle);
@@ -372,6 +445,7 @@
     renderThemes,
     renderAcf,
     renderSeo,
+    renderActivity,
     escapeHtml,
     statusPill,
   };

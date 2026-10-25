@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Activity · WordPress CMS | Oganiko Digital</title>
+<link rel="stylesheet" href="../assets/client.css">
+<link rel="stylesheet" href="../assets/og-tab-rail.css">
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand">OGANIKO Digital</div>
+  <h1>WordPress CMS</h1>
+  <div class="sub">updated <span id="last-updated"></span></div>
+  <script>
+    (function () {
+      var d = new Date(document.lastModified);
+      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      document.getElementById("last-updated").textContent = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+    })();
+  </script>
+  <div id="instance-switcher" class="instance-switcher"></div>
+  <nav class="og-tab-rail">
+    <a href="../">Overview</a>
+    <a href="../plugins/">Installed Plugins</a>
+    <a href="../themes/">Themes</a>
+    <a href="../settings/">Settings</a>
+    <a href="../acf/">ACF</a>
+    <a href="../seo/">SEO</a>
+    <a href="./" aria-current="page">Activity</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section aria-label="Activity">
+    <p class="lead" style="margin-top:10px">Every agent write to the selected instance, newest first.</p>
+    <p>Agents change WordPress only through <code>./src/wp/wp-write.sh &lt;id&gt; &lt;wp-cli args&gt;</code>. New posts land as drafts and deletes go to the trash. Risky writes (permanent deletes, SQL, uninstalls, <code>--force</code>, publishing) wait here until a human approves them at a terminal.</p>
+    <h3>Waiting for approval</h3>
+    <div id="activity-pending"></div>
+    <h3>Last 50 writes</h3>
+    <div id="activity-log"></div>
+    <div class="note">Source: <code>src/wp/instances/&lt;id&gt;.log.jsonl</code>, append-only and gitignored (it never reaches the public repo). Secret-looking values are masked before they are written.</div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 <span class="brand">Oganiko Digital</span> · OS-021-WordPress-CMS</span>
+  <span>Private project workspace</span>
+</div></footer>
+<script src="../assets/instance.js"></script>
+<script>
+  WpCms.boot([WpCms.renderActivity]);
+</script>
+</body>
+</html>
